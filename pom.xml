@@ -14,7 +14,7 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.1.1</gatling.version>
-        <perfana-gatling-maven-plugin.version>3.2.4</perfana-gatling-maven-plugin.version>
+        <perfana-gatling-maven-plugin.version>3.2.5</perfana-gatling-maven-plugin.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
