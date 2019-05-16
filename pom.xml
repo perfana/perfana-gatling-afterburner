@@ -17,7 +17,7 @@
         <perfana-gatling-maven-plugin.version>3.2.4</perfana-gatling-maven-plugin.version>
 
         <!-- Perfana url  -->
-        <perfanaUrl>http://localhost:4000</perfanaUrl>
+        <perfanaUrl>http://perfana:4000</perfanaUrl>
 
         <!-- Default Simulation class  -->
         <applicationSimulation>io.perfana.afterburner.gatling.setup.Afterburner</applicationSimulation>
@@ -146,7 +146,7 @@
                         <jvmArg>-Ddebug=${debug}</jvmArg>
                         <jvmArg>-DuseProxy=${useProxy}</jvmArg>
                         <jvmArg>-Dgatling.data.graphite.rootPathPrefix=gatling2.${application}.${testEnvironment}</jvmArg>
-                        <jvmArg>-Xms4g</jvmArg>
+                        <jvmArg>-Xms1g</jvmArg>
                         <jvmArg>-Xmx4g</jvmArg>
                         <jvmArg>-Djavax.net.ssl.sessionCacheSize=1000</jvmArg>
                         <jvmArg>-XX:+UseG1GC</jvmArg>
@@ -202,7 +202,7 @@
             <activeByDefault>false</activeByDefault>
         </activation>
         <properties>
-            <targetBaseUrl>https://acc.example.com</targetBaseUrl>
+            <targetBaseUrl>http://afterburner:8080</targetBaseUrl>
             <testEnvironment>acc</testEnvironment>
         </properties>
     </profile>
