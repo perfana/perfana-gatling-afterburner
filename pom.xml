@@ -245,7 +245,7 @@
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
                 <rampupTimeInSeconds>60</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>600</constantLoadTimeInSeconds>
+                <constantLoadTimeInSeconds>300</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.timestamp}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
