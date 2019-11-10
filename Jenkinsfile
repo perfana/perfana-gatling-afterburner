@@ -18,7 +18,7 @@ node("master") {
     stage 'Execute load test'
 
     // Run the test
-    sh "${mvnHome}/bin/mvn clean install -U perfana-gatling:test -Ptest-env-acc,test-type-load,assert-results -DtestRunId=$testRunId -DbuildResultsUrl=$buildUrl -DperfanaUrl=http://outside:4000 "
+    sh "${mvnHome}/bin/mvn clean install -U perfana-gatling:test -Ptest-env-acc,test-type-load,assert-results -DtestRunId=$testRunId -DbuildResultsUrl=$buildUrl //-DperfanaUrl=http://outside:4000 "
 
 
 
