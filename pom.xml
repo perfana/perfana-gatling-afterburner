@@ -56,7 +56,7 @@
         <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
 
         <!-- Settings for the Perfana Dashboard -->
-        <application>Afterburner</application>
+        <application>BurnAfter</application>
         <applicationRelease>1.0</applicationRelease>
         <tags></tags>
         
