@@ -17,7 +17,7 @@
         <perfana-gatling-maven-plugin.version>3.2.9</perfana-gatling-maven-plugin.version>
 
         <!-- Perfana url  -->
-        <perfanaUrl>http://perfana:3000</perfanaUrl>
+        <perfanaUrl>http://localhost:3000</perfanaUrl>
 
         <!-- Default Simulation class  -->
         <applicationSimulation>io.perfana.afterburner.gatling.setup.Afterburner</applicationSimulation>
@@ -44,7 +44,7 @@
         <isMasterScript>true</isMasterScript>
 
         <!-- By default don't send data to perfana -->
-        <perfanaEnabled>false</perfanaEnabled>
+        <perfanaEnabled>true</perfanaEnabled>
 
         <!-- By default don't assert test results -->
         <assertResultsEnabled>false</assertResultsEnabled>
@@ -89,9 +89,9 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>ia.perfana</groupId>
-                    <artifactId>perfana-gatling-maven-plugin</artifactId>
-                    <version>${perfana-gatling-maven-plugin.version}</version>
+                    <groupId>nl.stokpop</groupId>
+                    <artifactId>events-gatling-maven-plugin</artifactId>
+                    <version>3.0.3-events-4</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -116,8 +116,8 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>io.perfana</groupId>
-                <artifactId>perfana-gatling-maven-plugin</artifactId>
+                <groupId>nl.stokpop</groupId>
+                <artifactId>events-gatling-maven-plugin</artifactId>
                 <configuration>
                     <dataFolder>src/test/resources/data</dataFolder>
                     <resultsFolder>target/gatling/results</resultsFolder>
@@ -125,24 +125,44 @@
                     <simulationsFolder>src/test/scala</simulationsFolder>
                     <noReports>true</noReports>
                     <simulationClass>${applicationSimulation}</simulationClass>
-                    <perfanaUrl>${perfanaUrl}</perfanaUrl>
-                    <application>${application}</application>
-                    <applicationRelease>${applicationRelease}</applicationRelease>
-                    <testType>${testType}</testType>
-                    <testEnvironment>${testEnvironment}</testEnvironment>
-                    <testRunId>${testRunId}</testRunId>
-                    <CIBuildResultsUrl>${CIBuildResultsUrl}</CIBuildResultsUrl>
-                    <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
-                    <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
-                    <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
-                    <perfanaEnabled>${perfanaEnabled}</perfanaEnabled>
-                     <variables>
+
+                    <eventDebugEnabled>true</eventDebugEnabled>
+                    <eventApplication>${application}</eventApplication>
+                    <eventProductRelease>${applicationRelease}</eventProductRelease>
+                    <eventTestType>${testType}</eventTestType>
+                    <eventTestEnvironment>${testEnvironment}</eventTestEnvironment>
+                    <eventTestRunId>${testRunId}</eventTestRunId>
+                    <eventBuildResultsUrl>${CIBuildResultsUrl}</eventBuildResultsUrl>
+                    <eventRampupTimeInSeconds>${rampupTimeInSeconds}</eventRampupTimeInSeconds>
+                    <eventConstantLoadTimeInSeconds>${constantLoadTimeInSeconds}</eventConstantLoadTimeInSeconds>
+                    <eventVariables>
                         <property>
                             <name>$service</name>
                             <value>afterburner</value>
                         </property>
-                    </variables>
-                    <tags>${tags}</tags>
+                    </eventVariables>
+                    <eventTags>${tags}</eventTags>
+                    <eventScheduleScript>
+                        PT0S|wiremock-change-delay|delay=400
+                        PT5M|wiremock-change-delay|delay=2000
+                        PT10M|wiremock-change-delay|delay=4000
+                        PT15M|wiremock-change-delay|delay=8000
+                    </eventScheduleScript>                    <events>
+                        <!-- here you can define events, with own properties per event,
+                             so you can form instance create two wiremock events with different wiremockUrls for example -->
+                        <MyWireMockEvent>
+                            <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
+                            <enabled>false</enabled>
+                            <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
+                            <wiremockUrl>https://localhost:8080</wiremockUrl>
+                        </MyWireMockEvent>
+                        <MyPerfanaEvent>
+                            <eventFactory>io.perfana.event2.PerfanaEvent2Factory</eventFactory>
+                            <enabled>${perfanaEnabled}</enabled>
+                            <perfanaUrl>${perfanaUrl}</perfanaUrl>
+<!--                            <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>-->
+                        </MyPerfanaEvent>
+                    </events>
                     <jvmArgs>
                         <jvmArg>-Dscenario=${scenario}</jvmArg>
                         <jvmArg>-DtestRunId=${testRunId}</jvmArg>
@@ -164,6 +184,18 @@
                     <propagateSystemProperties>false</propagateSystemProperties>
                     <!--<failOnError>true</failOnError>-->
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>nl.stokpop</groupId>
+                        <artifactId>test-events-wiremock</artifactId>
+                        <version>1.1.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>perfana-java-client</artifactId>
+                        <version>1.3.8-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
 
