@@ -1,0 +1,18 @@
+{
+  "id": "355dc35c-36d6-47c3-af25-9c3dad55f081",
+  "name": "perfana-demo-remote-call",
+  "request": {
+    "method": "GET",
+    "url": "/delay"
+  },
+  "response": {
+    "status": 200,
+    "body": "Hello world! from Wiremock, with delay :-)",
+    "fixedDelayMilliseconds": 500,
+    "headers": {
+      "Content-Type": "text/plain"
+    }
+  },
+  "uuid": "355dc35c-36d6-47c3-af25-9c3dad55f081",
+  "persistent": true
+}
