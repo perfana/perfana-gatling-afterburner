@@ -9,7 +9,7 @@ node("master") {
     stage 'Checkout'
 
     // Get script from a GitHub repository
-    git url: 'https://github.com/perfana/perfana-gatling-afterburner.git', branch: 'burn-after'
+    git url: 'https://github.com/perfana/perfana-gatling-afterburner.git', branch: 'burn-after-wiremock'
     // Get the maven tool.
     // ** NOTE: This 'M3' maven tool must be configured
     // **       in the global configuration.
