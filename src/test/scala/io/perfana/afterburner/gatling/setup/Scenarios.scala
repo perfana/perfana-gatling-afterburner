@@ -24,6 +24,8 @@ object Scenarios {
     .exec(SimpleMiniLeak.call)
     .pause(3)
     .exec(UploadFile.call)
+    .pause(3)
+    .exec(RemoteDelay.call)
 
     
 
