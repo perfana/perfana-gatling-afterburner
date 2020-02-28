@@ -1,6 +1,7 @@
 node("master") {
 
     def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
+    def version = "1.0." + env.BUILD_NUMBER
     def buildUrl = env.BUILD_URL
 
     // Mark the code checkout 'stage'....
@@ -8,8 +9,7 @@ node("master") {
     stage 'Checkout'
 
     // Get script from a GitHub repository
-    git url: 'https://github.com/perfana/perfana-gatling-afterburner.git',
-        branch: 'burn-after'
+    git url: 'https://github.com/perfana/perfana-gatling-afterburner.git', branch: 'burn-after'
     // Get the maven tool.
     // ** NOTE: This 'M3' maven tool must be configured
     // **       in the global configuration.
@@ -19,7 +19,7 @@ node("master") {
     stage 'Execute load test'
 
     // Run the test
-    sh "${mvnHome}/bin/mvn clean install -U perfana-gatling:test -Ptest-env-acc,test-type-load,assert-results -DtestRunId=$testRunId -DbuildResultsUrl=$buildUrl -DperfanaUrl=http://outside:4000 "
+    sh "${mvnHome}/bin/mvn clean install -U perfana-gatling:test -Ptest-env-acc,test-type-load,assert-results -DtestRunId=$testRunId -DbuildResultsUrl=$buildUrl -DapplicationRelease=$version "
 
 
 
