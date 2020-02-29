@@ -11,7 +11,7 @@
 
 pipeline {
 
-    agent any
+    node master
 
     parameters {
         string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
