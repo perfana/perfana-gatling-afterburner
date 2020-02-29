@@ -297,7 +297,7 @@
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.timestamp}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
-                <tags>release-load-test,perfana-demo-host</tags>
+                <tags>load-test,perfana-demo-host</tags>
             </properties>
         </profile>
 
