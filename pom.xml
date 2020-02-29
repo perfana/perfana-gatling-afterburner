@@ -256,8 +256,8 @@
             <properties>
                 <testType>stressTest</testType>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>100</targetUsersPerSecond>
-                <rampupTimeInSeconds>3600</rampupTimeInSeconds>
+                <targetUsersPerSecond>30</targetUsersPerSecond>
+                <rampupTimeInSeconds>900</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.time}</testRunId>
