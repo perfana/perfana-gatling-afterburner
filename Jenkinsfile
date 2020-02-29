@@ -25,13 +25,15 @@ node("master") {
 
             stage('Checkout') {
 
-                git url: 'https://github.com/perfana/perfana-gatling-afterburner.git'
+                git url: params.gatlingRepo, branch: params.gatlingBranch
 
             }
 
             stage('Run performance test') {
 
-                sh "${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,test-type-load,assert-results -DtestRunId=$testRunId -DbuildResultsUrl=$buildUrl -DapplicationRelease=$version  "
+                sh """
+                    ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
+                   """
 
             }
         }
