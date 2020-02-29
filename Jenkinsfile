@@ -26,15 +26,23 @@ pipeline {
 
         stage('Checkout') {
 
-            git url: params.gatlingRepo, branch: params.gatlingBranch
+            steps {
+
+                git url: params.gatlingRepo, branch: params.gatlingBranch
+
+            }
 
         }
 
         stage('Run performance test') {
 
-            sh """
-                ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
-               """
+            steps {
+
+                sh """
+                   ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
+                """
+
+            }
 
         }
     }
