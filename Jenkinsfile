@@ -11,41 +11,41 @@
 
 pipeline {
 
-    agent { label 'master' }
+    node('master') {
 
-    parameters {
-        string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
-        string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
-        string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
-        choice(name: 'workload', choices: ['test-type-load', 'test-type-stress'], description: 'Workload profile to use in your Gatling script')
-        string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
-
-    }
-
-    stages {
-
-        stage('Checkout') {
-
-            steps {
-
-                git url: params.gatlingRepo, branch: params.gatlingBranch
-
-            }
+        parameters {
+            string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
+            string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
+            string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
+            choice(name: 'workload', choices: ['test-type-load', 'test-type-stress'], description: 'Workload profile to use in your Gatling script')
+            string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
 
         }
 
-        stage('Run performance test') {
+        stages {
 
-            steps {
+            stage('Checkout') {
 
-                sh """
-                   ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
-                """
+                steps {
+
+                    git url: params.gatlingRepo, branch: params.gatlingBranch
+
+                }
 
             }
 
+            stage('Run performance test') {
+
+                steps {
+
+                    sh """
+                       ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
+                    """
+
+                }
+
+            }
         }
     }
-
 
 }
