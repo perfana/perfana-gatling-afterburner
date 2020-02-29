@@ -11,28 +11,24 @@
 
 pipeline {
 
-    node {
+   agent any
 
-        agent {
-            node {
-                label 'master'
-            }
-        }
+    parameters {
+        string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
+        string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
+        string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
+        choice(name: 'workload', choices: ['test-type-load', 'test-type-stress'], description: 'Workload profile to use in your Gatling script')
+        string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
 
-        parameters {
-            string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
-            string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
-            string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
-            choice(name: 'workload', choices: ['test-type-load', 'test-type-stress'], description: 'Workload profile to use in your Gatling script')
-            string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
+    }
 
-        }
+    stages {
 
-        stages {
+        stage('Checkout') {
 
-            stage('Checkout') {
+            steps {
 
-                steps {
+                script {
 
                     git url: params.gatlingRepo, branch: params.gatlingBranch
 
@@ -40,17 +36,21 @@ pipeline {
 
             }
 
-            stage('Run performance test') {
+        }
 
-                steps {
+        stage('Run performance test') {
+
+            steps {
+
+                script {
 
                     sh """
                        ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
                     """
-
                 }
-
             }
+
         }
     }
+
 }
