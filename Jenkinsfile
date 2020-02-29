@@ -1,12 +1,4 @@
 
-    def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
-    def version = "1.0." + env.BUILD_NUMBER
-    def buildUrl = env.BUILD_URL
-
-    // ** NOTE: This 'M3' maven tool must be configured
-    // **       in the global configuration.
-
-    def mvnHome = tool 'M3'
 
 
 pipeline {
@@ -43,6 +35,15 @@ pipeline {
             steps {
 
                 script {
+
+                    def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
+                    def version = "1.0." + env.BUILD_NUMBER
+                    def buildUrl = env.BUILD_URL
+
+                    // ** NOTE: This 'M3' maven tool must be configured
+                    // **       in the global configuration.
+
+                    def mvnHome = tool 'M3'
 
                     sh """
                        ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-acc,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -DapplicationRelease=${version} -Dapplication=${system_under_test}
