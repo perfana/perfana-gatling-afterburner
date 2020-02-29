@@ -1,4 +1,3 @@
-node("master") {
 
     def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
     def version = "1.0." + env.BUILD_NUMBER
@@ -10,7 +9,9 @@ node("master") {
     def mvnHome = tool 'M3'
 
 
-    pipeline {
+pipeline {
+
+    node("master") {
 
         parameters {
             string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
