@@ -282,6 +282,25 @@
                 <tags>release-load-test,perfana-demo-host</tags>
             </properties>
         </profile>
+
+        <profile>
+            <id>test-type-slow-backend</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <testType>slowBackendTest</testType>
+                <initialUsersPerSecond>1</initialUsersPerSecond>
+                <targetUsersPerSecond>2</targetUsersPerSecond>
+                <rampupTimeInSeconds>60</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>300</constantLoadTimeInSeconds>
+                <perfanaEnabled>true</perfanaEnabled>
+                <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.timestamp}</testRunId>
+                <graphitePrefix>gatling2</graphitePrefix>
+                <tags>release-load-test,perfana-demo-host</tags>
+            </properties>
+        </profile>
+
         <profile>
             <id>test-type-endurance</id>
             <activation>
