@@ -145,21 +145,21 @@
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
-<!--                    <eventScheduleScript>-->
-<!--                        PT0S|wiremock-change-delay(delay=400)|delay=400|-->
-<!--                        PT1M|wiremock-change-delay(delay=2000)|delay=2000-->
-<!--                        PT2M|wiremock-change-delay(delay=4000)|delay=4000-->
-<!--                        PT3M|wiremock-change-delay(delay=8000)|delay=8000-->
-<!--                    </eventScheduleScript>-->
+                    <eventScheduleScript>
+                        PT0S|wiremock-change-delay(delay=400)|delay=400|
+                        PT1M|wiremock-change-delay(delay=2000)|delay=2000
+                        PT2M|wiremock-change-delay(delay=4000)|delay=4000
+                        PT3M|wiremock-change-delay(delay=8000)|delay=8000
+                    </eventScheduleScript>
                     <events>
                     <!-- here you can define events, with own properties per event,
                          so you can form instance create two wiremock events with different wiremockUrls for example -->
-<!--                    <MyWireMockEvent>-->
-<!--                        <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>-->
-<!--                        <enabled>false</enabled>-->
-<!--                        <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>-->
-<!--                        <wiremockUrl>https://localhost:8080</wiremockUrl>-->
-<!--                    </MyWireMockEvent>-->
+                    <MyWireMockEvent>
+                        <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
+                        <enabled>false</enabled>
+                        <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
+                        <wiremockUrl>https://localhost:8080</wiremockUrl>
+                    </MyWireMockEvent>
                     <MyPerfanaEvent>
                         <eventFactory>io.perfana.event2.PerfanaEvent2Factory</eventFactory>
                         <enabled>${perfanaEnabled}</enabled>
