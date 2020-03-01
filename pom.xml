@@ -256,12 +256,13 @@
             <properties>
                 <testType>stressTest</testType>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>100</targetUsersPerSecond>
-                <rampupTimeInSeconds>3600</rampupTimeInSeconds>
+                <targetUsersPerSecond>30</targetUsersPerSecond>
+                <rampupTimeInSeconds>1800</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.time}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
+                <tags>stress-test</tags>
             </properties>
         </profile>
 
@@ -279,7 +280,7 @@
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.timestamp}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
-                <tags>release-load-test</tags>
+                <tags>load-test</tags>
             </properties>
         </profile>
         <profile>
