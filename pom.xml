@@ -160,13 +160,13 @@
                          so you can form instance create two wiremock events with different wiremockUrls for example -->
                     <MyWireMockEvent>
                         <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
-                        <enabled>false</enabled>
+                        <enabled>${eventsEnabled}</enabled>
                         <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
                         <wiremockUrl>https://localhost:8080</wiremockUrl>
                     </MyWireMockEvent>
                     <MyPerfanaEvent>
                         <eventFactory>io.perfana.event2.PerfanaEvent2Factory</eventFactory>
-                        <enabled>${eventsEnabled}</enabled>
+                        <enabled>true</enabled>
                         <perfanaUrl>${perfanaUrl}</perfanaUrl>
                     </MyPerfanaEvent>
                 </events>
