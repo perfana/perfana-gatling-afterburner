@@ -53,7 +53,7 @@
 
         <!-- By default disable events -->
         <eventsEnabled>false</eventsEnabled>
-
+        <eventScheduleScript></eventScheduleScript>
 
         <!-- Default load settings -->
         <initialUsersPerSecond>1</initialUsersPerSecond>
@@ -150,10 +150,7 @@
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
                     <eventScheduleScript>
-                        PT0S|wiremock-change-delay(delay=400)|delay=400
-                        PT1M|wiremock-change-delay(delay=2000)|delay=2000
-                        PT2M|wiremock-change-delay(delay=4000)|delay=4000
-                        PT3M|wiremock-change-delay(delay=8000)|delay=8000
+                        ${eventScheduleScript}
                     </eventScheduleScript>
                     <events>
                     <!-- here you can define events, with own properties per event,
@@ -303,6 +300,12 @@
                 <testRunId>${application}-${applicationRelease}-${testType}-${testEnvironment}-${maven.build.timestamp}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
                 <eventsEnabled>true</eventsEnabled>
+                <eventScheduleScript>
+                    PT0S|wiremock-change-delay(delay=400)|delay=400
+                    PT1M|wiremock-change-delay(delay=2000)|delay=2000
+                    PT2M|wiremock-change-delay(delay=4000)|delay=4000
+                    PT3M|wiremock-change-delay(delay=8000)|delay=8000
+                </eventScheduleScript>
                 <tags>load-test,perfana-demo-host</tags>
             </properties>
         </profile>
