@@ -51,6 +51,10 @@
         <!-- By default don't assert test results -->
         <assertResultsEnabled>false</assertResultsEnabled>
 
+        <!-- By default disable events -->
+        <eventsEnabled>false</eventsEnabled>
+
+
         <!-- Default load settings -->
         <initialUsersPerSecond>1</initialUsersPerSecond>
         <targetUsersPerSecond>1</targetUsersPerSecond>
@@ -162,7 +166,7 @@
                     </MyWireMockEvent>
                     <MyPerfanaEvent>
                         <eventFactory>io.perfana.event2.PerfanaEvent2Factory</eventFactory>
-                        <enabled>${perfanaEnabled}</enabled>
+                        <enabled>${eventsEnabled}</enabled>
                         <perfanaUrl>${perfanaUrl}</perfanaUrl>
                     </MyPerfanaEvent>
                 </events>
