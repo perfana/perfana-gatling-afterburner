@@ -159,7 +159,7 @@
                         <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
                         <enabled>${eventsEnabled}</enabled>
                         <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
-                        <wiremockUrl>https://wiremock:8080</wiremockUrl>
+                        <wiremockUrl>http://wiremock:8080</wiremockUrl>
                     </MyWireMockEvent>
                     <MyPerfanaEvent>
                         <eventFactory>io.perfana.event2.PerfanaEvent2Factory</eventFactory>
