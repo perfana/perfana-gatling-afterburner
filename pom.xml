@@ -305,6 +305,8 @@
                     PT1M|wiremock-change-delay(delay=2000)|delay=2000
                     PT2M|wiremock-change-delay(delay=4000)|delay=4000
                     PT3M|wiremock-change-delay(delay=8000)|delay=8000
+                    PT4M|wiremock-change-delay(delay=10000)|delay=10000
+                    PT5M|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
                 <tags>load-test,perfana-demo-host</tags>
             </properties>
