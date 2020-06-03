@@ -246,6 +246,17 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>test-env-demo</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <targetBaseUrl>http://afterburner-fe:8080</targetBaseUrl>
+                <testEnvironment>acc</testEnvironment>
+            </properties>
+        </profile>
+
 
         <!-- Test type profiles -->
 
