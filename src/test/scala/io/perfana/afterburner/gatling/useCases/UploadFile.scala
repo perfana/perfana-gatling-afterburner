@@ -15,6 +15,8 @@ object UploadFile {
                 StringBodyPart("upload", "test from gatling")
                   .fileName("gatling-upload.txt")
             )
+            .header("perfana-request-name", "upload-file")
+
         )
 
 }

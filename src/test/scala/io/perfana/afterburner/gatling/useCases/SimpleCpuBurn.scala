@@ -10,6 +10,7 @@ object SimpleCpuBurn {
 
   val call = exec(http("simple_cpu_burn")
             .get("/cpu/magic-identity-check?matrixSize=133")
+            .header("perfana-request-name", "simple_cpu_burn")
             .check(status.is(200)))
         
 }
