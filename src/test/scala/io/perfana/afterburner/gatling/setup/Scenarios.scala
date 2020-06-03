@@ -1,5 +1,6 @@
 package io.perfana.afterburner.gatling.setup
 
+import io.perfana.afterburner.gatling.configuration.Configuration
 import io.perfana.afterburner.gatling.useCases._
 import io.perfana.afterburner.gatling.feeders._
 import io.gatling.core.Predef._
@@ -17,6 +18,7 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
+    .exec(session => session.set("testRunId", Configuration.testRunId))  
     .exec(SimpleCpuBurn.call)
     .pause(3)
     .exec(SimpleDelay.call)

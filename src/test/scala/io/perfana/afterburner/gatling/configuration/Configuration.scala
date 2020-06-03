@@ -69,7 +69,6 @@ object Configuration {
     .contentTypeHeader("""application/json;charset=UTF-8""")
     .userAgentHeader("""Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36""")
     .inferHtmlResources(WhiteList(""".*""" + Configuration.targetBaseUrl + """.*"""), BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png"""))
-    .header("perfana-test-run-id",System.getProperty("testRunId"))
 
 
   private val baseHttpDebugProtocol = http
