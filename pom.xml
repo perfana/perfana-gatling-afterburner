@@ -275,13 +275,6 @@
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
                 <tags>stress-test</tags>
-                <eventsEnabled>true</eventsEnabled>
-                <eventScheduleScript>
-                    PT0S|wiremock-change-delay(delay=400)|delay=400
-                    PT1M|wiremock-change-delay(delay=2000)|delay=2000
-                    PT2M|wiremock-change-delay(delay=4000)|delay=4000
-                    PT3M|wiremock-change-delay(delay=8000)|delay=8000
-                </eventScheduleScript>
             </properties>
         </profile>
 
