@@ -28,6 +28,8 @@ object Scenarios {
     .exec(UploadFile.call)
     .pause(3)
     .exec(RemoteDelay.call)
+    .pause(3)
+    .exec(CallMany.call)
 
     
 
