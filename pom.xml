@@ -142,6 +142,8 @@
                     <eventBuildResultsUrl>${CIBuildResultsUrl}</eventBuildResultsUrl>
                     <eventRampupTimeInSeconds>${rampupTimeInSeconds}</eventRampupTimeInSeconds>
                     <eventConstantLoadTimeInSeconds>${constantLoadTimeInSeconds}</eventConstantLoadTimeInSeconds>
+                    <eventAnnotations>${annotations}</eventAnnotations>
+
                     <eventVariables>
                         <property>
                             <name>$service</name>
