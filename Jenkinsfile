@@ -47,8 +47,7 @@ pipeline {
                     def mvnHome = tool 'M3'
 
                     sh """
-        string(name: 'targetBaseUrl', defaultValue: '', description: 'Target Url')
-                       ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DtargetBaseUrl=${targetBaseUrl}
+                               ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DtargetBaseUrl=${targetBaseUrl}
                     """
                 }
             }
