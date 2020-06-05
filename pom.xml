@@ -22,7 +22,7 @@
         <perfanaUrl>http://perfana:3000</perfanaUrl>
 
         <!-- Default Simulation class  -->
-        <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.OptimusPrime</systemUnderTestSimulation>
+        <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.MegaTron</systemUnderTestSimulation>
 
         <!-- By default Jenkins build Url is used -->
         <CIBuildResultsUrl>${BUILD_URL}</CIBuildResultsUrl>
