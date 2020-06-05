@@ -23,7 +23,7 @@ pipeline {
 
                 script {
 
-                    git url: params.gatlingRepo, branch: params.gatlingBranch
+                    git url: params.gatlingRepo, branch: params.system_under_test
 
                 }
 
