@@ -11,7 +11,7 @@ import scala.concurrent.duration._
  * the application.conf file. When changes have to be made to which scenarios to run, that
  * information is gathered in the Scenarios object.
  */
-class Afterburner extends Simulation {
+class OptimusPrime extends Simulation {
 
 
 /**
