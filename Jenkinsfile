@@ -8,7 +8,7 @@ pipeline {
     parameters {
         string(name: 'system_under_test', defaultValue: 'StarScream', description: 'Name used as System Under Test in Perfana')
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
-        string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
+        // string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend'], description: 'Workload profile to use in your Gatling script')
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
         string(name: 'targetBaseUrl', defaultValue: 'http://star-scream-fe', description: 'Target Url')
