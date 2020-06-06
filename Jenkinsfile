@@ -11,7 +11,7 @@ pipeline {
         // string(name: 'gatlingBranch', defaultValue: 'master', description: 'Gatling git repository branch')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend'], description: 'Workload profile to use in your Gatling script')
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
-        string(name: 'targetBaseUrl', defaultValue: 'http://optimus-prime-fe', description: 'Target Url')
+        string(name: 'targetBaseUrl', defaultValue: 'http://optimus-prime-fe:8080', description: 'Target Url')
 
     }
 
