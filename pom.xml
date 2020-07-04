@@ -251,6 +251,16 @@
         </profile>
 
         <profile>
+            <id>test-env-demo</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <testEnvironment>acc</testEnvironment>
+            </properties>
+        </profile>
+
+        <profile>
             <id>kubernetes</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
