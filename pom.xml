@@ -65,7 +65,9 @@
         <systemUnderTest>Afterburner</systemUnderTest>
         <version>1.0</version>
         <tags></tags>
-        
+
+        <wiremockUrl>http://wiremock:8080</wiremockUrl>
+
     </properties>
 
     <dependencyManagement>
@@ -161,7 +163,7 @@
                         <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
                         <enabled>${eventsEnabled}</enabled>
                         <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
-                        <wiremockUrl>http://wiremock:8080</wiremockUrl>
+                        <wiremockUrl>${wiremockUrl}</wiremockUrl>
                     </MyWireMockEvent>
                     <MyPerfanaEvent>
                         <eventFactory>io.perfana.event.PerfanaEventFactory</eventFactory>
@@ -254,7 +256,8 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <perfanaUrl>http://perfana.perfana.svc.cluster.local:3000</perfanaUrl>
+                <perfanaUrl>http://perfana.perfana.svc.cluster.local</perfanaUrl>
+                <wiremockUrl>http://wiremock.perfana.svc.cluster.local:8080</wiremockUrl>
             </properties>
         </profile>
 
