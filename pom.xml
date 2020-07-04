@@ -249,13 +249,12 @@
         </profile>
 
         <profile>
-            <id>test-env-demo</id>
+            <id>kubernetes</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <targetBaseUrl>http://afterburner-fe:8080</targetBaseUrl>
-                <testEnvironment>acc</testEnvironment>
+                <perfanaUrl>http://perfana.perfana.svc.cluster.local:3000</perfanaUrl>
             </properties>
         </profile>
 
