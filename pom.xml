@@ -270,7 +270,7 @@
             <properties>
                 <perfanaUrl>http://perfana.perfana.svc.cluster.local</perfanaUrl>
                 <wiremockUrl>http://wiremock.perfana.svc.cluster.local:8080</wiremockUrl>
-                <influxDbHost>influxdb-influxdb.perfana.svc.cluster.local</influxDbHost>
+                <influxDbHost>influxdb.perfana.svc.cluster.local</influxDbHost>
             </properties>
         </profile>
 
@@ -290,7 +290,6 @@
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
-                <graphitePrefix>gatling2</graphitePrefix>
                 <tags>stress-test</tags>
             </properties>
         </profile>
@@ -308,7 +307,6 @@
                 <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
-                <graphitePrefix>gatling2</graphitePrefix>
                 <eventsEnabled>true</eventsEnabled>
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
