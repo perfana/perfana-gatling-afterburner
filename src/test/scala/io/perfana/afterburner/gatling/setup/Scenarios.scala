@@ -18,6 +18,7 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
+    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))  
     .exec(SimpleCpuBurn.call)
     .pause(3)
@@ -30,6 +31,8 @@ object Scenarios {
     .exec(RemoteDelay.call)
     .pause(3)
     .exec(CallMany.call)
+    .pause(3)
+    .exec(Database.call)
 
     
 
@@ -37,8 +40,11 @@ object Scenarios {
    * These are the scenarios run in 'debug' mode.
    */
   val debugScenario = scenario("debug")
+    .exec(session => session.set("testRunId", Configuration.testRunId))
+    .feed(DatabaseFeeder.mariaDb)
     .exitBlockOnFail(
-      exec(SimpleCpuBurn.call)
+      pause(3)
+        .exec(Database.call)
     )
 
 
