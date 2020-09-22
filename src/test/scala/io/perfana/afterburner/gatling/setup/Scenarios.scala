@@ -19,7 +19,7 @@ object Scenarios {
    */
   val acceptanceTestScenario = scenario("Acceptance test")
     .feed(DatabaseFeeder.mariaDb)
-//    .exec(session => session.set("testRunId", Configuration.testRunId))
+    .exec(session => session.set("testRunId", Configuration.testRunId))
 //    .exec(SimpleCpuBurn.call)
 //    .pause(3)
 //    .exec(SimpleDelay.call)
