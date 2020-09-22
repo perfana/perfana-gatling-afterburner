@@ -9,7 +9,7 @@ import scala.concurrent.duration._
 object Database {
 
   val call = exec(http("database_call")
-            .get("/remote/call?path=/db/employee/name?firstName=${FIRST_NAME}")
+            .get("/remote/call-many?count=20&path=/db/employee/name?firstName=${FIRST_NAME}")
             .header("perfana-request-name", "database_call")
             .header("perfana-test-run-id", "${testRunId}")
             .check(status.is(200)))
