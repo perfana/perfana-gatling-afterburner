@@ -153,8 +153,8 @@
 
                     <eventVariables>
                         <property>
-                            <name>$service</name>
-                            <value>afterburner</value>
+                            <name>$container_names</name>
+                            <value>.*mariadb.*|.*optimus-prime.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
