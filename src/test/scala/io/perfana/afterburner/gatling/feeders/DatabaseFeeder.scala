@@ -14,5 +14,5 @@ import io.gatling.jdbc.Predef._
  */
 object DatabaseFeeder {
 
-  var mariaDb = jdbcFeeder("jdbc:mariadb://mariadb:3306/employees", "root", "perfana", "SELECT DISTINCT last_name as LAST_NAME from employees.employees;").random()
+  var mariaDb = jdbcFeeder("jdbc:mariadb://mariadb:3306/employees", "root", "perfana", "SELECT DISTINCT first_name as FIRST_NAME from employees.employees;").random()
 }
