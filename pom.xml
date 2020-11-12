@@ -154,7 +154,7 @@
                     <eventVariables>
                         <property>
                             <name>$container_names</name>
-                            <value>.*mariadb.*|.*optimus-prime-fe</value>
+                            <value>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
