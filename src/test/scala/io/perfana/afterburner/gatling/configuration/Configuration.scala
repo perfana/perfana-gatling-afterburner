@@ -83,7 +83,7 @@ object Configuration {
     (baseHttpDebugProtocol)
   }
 
-  // dump all configration to log
+  // dump all configuration to log
 
   val dump = ConfigurationDumper.values // just here to dump config before code below is instantiated
 
