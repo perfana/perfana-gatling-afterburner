@@ -150,7 +150,7 @@
                    <eventVariables>
                         <property>
                             <name>$container_names</name>
-                            <value>.*optimus-prim-.*</value>
+                            <value>.*optimus-prime-.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
