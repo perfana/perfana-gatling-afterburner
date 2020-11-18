@@ -1,8 +1,9 @@
-package com.ahold.appiediscoverbff.helpers
+package io.perfana.afterburner.gatling.helpers
 
 import java.util.Properties
 
-import com.ahold.appiediscoverbff.configuration._
+import io.perfana.afterburner.gatling.configuration._
+
 
 object ConfigurationDumper {
 
@@ -13,9 +14,9 @@ object ConfigurationDumper {
     systemProperties.forEach( (key, value) => values += "System.getProperty(\"" + key + "\") = " + value + "\n")
     values += "="*100 + "\nTestConfiguration values:\n\n"
 
-    for (field <- TestConfiguration.getClass.getDeclaredFields()) {
+    for (field <- Configuration.getClass.getDeclaredFields()) {
     field.setAccessible(true)
-    values += s"TestConfiguration.${field.getName} = ${field.get(TestConfiguration)}\n"
+    values += s"Configuration.${field.getName} = ${field.get(Configuration)}\n"
     }
 
     println(values) // I print this now, so it will be printed during creation of object instances etc, before running
