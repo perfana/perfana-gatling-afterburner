@@ -147,10 +147,10 @@
                     <eventConstantLoadTimeInSeconds>${constantLoadTimeInSeconds}</eventConstantLoadTimeInSeconds>
                     <eventAnnotations>${annotations}</eventAnnotations>
 
-                    <eventVariables>
+                   <eventVariables>
                         <property>
-                            <name>$service</name>
-                            <value>afterburner</value>
+                            <name>$container_names</name>
+                            <value>.*optimus-prim-.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
