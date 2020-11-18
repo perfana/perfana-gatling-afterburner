@@ -147,10 +147,10 @@
                     <eventConstantLoadTimeInSeconds>${constantLoadTimeInSeconds}</eventConstantLoadTimeInSeconds>
                     <eventAnnotations>${annotations}</eventAnnotations>
 
-                    <eventVariables>
+                   <eventVariables>
                         <property>
-                            <name>$service</name>
-                            <value>afterburner</value>
+                            <name>$container_names</name>
+                            <value>.*optimus-prime-.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
@@ -268,7 +268,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <perfanaUrl>http://perfana.perfana.svc.cluster.local</perfanaUrl>
+                <perfanaUrl>http://perfana.svc.cluster.local:3000</perfanaUrl>
                 <wiremockUrl>http://wiremock.perfana.svc.cluster.local:8080</wiremockUrl>
                 <influxDbHost>influxdb.perfana.svc.cluster.local</influxDbHost>
             </properties>
