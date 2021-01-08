@@ -8,7 +8,7 @@ import scala.concurrent.duration._
 
 object UploadFile {
 
-  val call = exec(http("upload-file")
+  val call = exec(http("upload-file_instant")
             .post("/files/upload")
             .asMultipartForm
             .bodyPart(
