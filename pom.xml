@@ -14,9 +14,9 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.1.0-events-3</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.4.3</perfana-java-client.version>
-        <test-events-wiremock.version>1.1.2</test-events-wiremock.version>
+        <events-gatling-maven-plugin.version>3.1.0-events-2.0-SNAPSHOT</events-gatling-maven-plugin.version>
+        <perfana-java-client.version>1.5.0-SNAPSHOT</perfana-java-client.version>
+        <test-events-wiremock.version>1.2.0-SNAPSHOT</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -134,48 +134,13 @@
                 <groupId>nl.stokpop</groupId>
                 <artifactId>events-gatling-maven-plugin</artifactId>
                 <configuration>
-                    <dataFolder>src/test/resources/data</dataFolder>
                     <resultsFolder>target/gatling/results</resultsFolder>
-                    <bodiesFolder>src/test/resources/request-bodies</bodiesFolder>
                     <simulationsFolder>src/test/scala</simulationsFolder>
                     <noReports>true</noReports>
                     <simulationClass>${systemUnderTestSimulation}</simulationClass>
-                    <eventDebugEnabled>true</eventDebugEnabled>
-                    <eventSystemUnderTest>${systemUnderTest}</eventSystemUnderTest>
-                    <eventVersion>${version}</eventVersion>
-                    <eventWorkload>${workload}</eventWorkload>
-                    <eventTestEnvironment>${testEnvironment}</eventTestEnvironment>
-                    <eventTestRunId>${testRunId}</eventTestRunId>
-                    <eventBuildResultsUrl>${CIBuildResultsUrl}</eventBuildResultsUrl>
-                    <eventRampupTimeInSeconds>${rampupTimeInSeconds}</eventRampupTimeInSeconds>
-                    <eventConstantLoadTimeInSeconds>${constantLoadTimeInSeconds}</eventConstantLoadTimeInSeconds>
-                    <eventAnnotations>${annotations}</eventAnnotations>
-
-                    <eventVariables>
-                        <property>
-                            <name>$container_names</name>
-                            <value>.*mariadb.*|.*optimus-prime.*</value>
-                        </property>
-                    </eventVariables>
-                    <eventTags>${tags}</eventTags>
-                    <eventScheduleScript>
-                        ${eventScheduleScript}
-                    </eventScheduleScript>
-                    <events>
                     <!-- here you can define events, with own properties per event,
                          so you can form instance create two wiremock events with different wiremockUrls for example -->
-                    <MyWireMockEvent>
-                        <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
-                        <enabled>${eventsEnabled}</enabled>
-                        <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
-                        <wiremockUrl>${wiremockUrl}</wiremockUrl>
-                    </MyWireMockEvent>
-                    <MyPerfanaEvent>
-                        <eventFactory>io.perfana.event.PerfanaEventFactory</eventFactory>
-                        <enabled>${perfanaEnabled}</enabled>
-                        <perfanaUrl>${perfanaUrl}</perfanaUrl>
-                    </MyPerfanaEvent>
-                </events>
+
                     <jvmArgs>
                         <jvmArg>-Dscenario=${scenario}</jvmArg>
                         <jvmArg>-DtestRunId=${testRunId}</jvmArg>
@@ -192,6 +157,45 @@
                         <jvmArg>-Xmx4g</jvmArg>
                     </jvmArgs>
                     <propagateSystemProperties>false</propagateSystemProperties>
+                    <eventSchedulerConfig>
+                        <debugEnabled>true</debugEnabled>
+                        <schedulerEnabled>${perfanaEnabled}</schedulerEnabled>
+                        <failOnError>true</failOnError>
+                        <continueOnEventCheckFailure>true</continueOnEventCheckFailure>
+                        <scheduleScript>
+                            ${eventScheduleScript}
+                        </scheduleScript>
+                        <eventConfigs>
+<!--                            <eventConfig implementation="io.perfana.event.WiremockEventConfig">-->
+<!--                                    <enabled>${eventsEnabled}</enabled>-->
+<!--                                    <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>-->
+<!--                                    <wiremockUrl>${wiremockUrl}</wiremockUrl>-->
+<!--                            </eventConfig>-->
+                            <eventConfig implementation="io.perfana.event.PerfanaEventConfig">
+                                <name>PerfanaEvent</name>
+                                <perfanaUrl>${perfanaUrl}</perfanaUrl>
+                                <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
+                                <variables>
+                                    <variable>
+                                        <name>$container_names</name>
+                                        <value>.*mariadb.*|.*optimus-prime.*</value>
+                                    </variable>
+                                </variables>
+                                <testConfig>
+                                    <systemUnderTest>${systemUnderTest}</systemUnderTest>
+                                    <version>${version}</version>
+                                    <workload>${workload}</workload>
+                                    <testEnvironment>${testEnvironment}</testEnvironment>
+                                    <testRunId>${testRunId}</testRunId>
+                                    <buildResultsUrl>${buildResultsUrl}</buildResultsUrl>
+                                    <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
+                                    <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
+                                    <annotations>${annotations}</annotations>
+                                    <tags>${tags}</tags>
+                                </testConfig>
+                            </eventConfig>
+                        </eventConfigs>
+                    </eventSchedulerConfig>
                 </configuration>
                 <dependencies>
                     <dependency>
