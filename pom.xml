@@ -175,52 +175,56 @@
                                 <name>PerfanaEvent</name>
                                 <perfanaUrl>${perfanaUrl}</perfanaUrl>
                                 <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
-                                <variables>
-                                    <variable>
-                                        <name>$container_names</name>
-                                        <value>.*mariadb.*|.*optimus-prime.*</value>
-                                    </variable>
-                                </variables>
-                                <testConfig>
-                                    <systemUnderTest>${systemUnderTest}</systemUnderTest>
-                                    <version>${version}</version>
-                                    <workload>${workload}</workload>
-                                    <testEnvironment>${testEnvironment}</testEnvironment>
-                                    <testRunId>${testRunId}</testRunId>
-                                    <buildResultsUrl>${buildResultsUrl}</buildResultsUrl>
-                                    <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
-                                    <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
-                                    <annotations>${annotations}</annotations>
-                                    <tags>${tags}</tags>
-                                </testConfig>
-                            </eventConfig>
-                        </eventConfigs>
-                    </eventSchedulerConfig>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>nl.stokpop</groupId>
-                        <artifactId>test-events-wiremock</artifactId>
-                        <version>${test-events-wiremock.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>io.perfana</groupId>
-                        <artifactId>perfana-java-client</artifactId>
-                        <version>${perfana-java-client.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
+<!--                                <variables>-->
+<!--                                    <variable>-->
+<!--                                        <name>$container_names</name>&ndash;&gt;-->
+<!--                                        <value>.*mariadb.*|.*optimus-prime.*</value>-->
+<!--                                    </variable>-->
+<!--                                </variables>-->
+                                    <variables>
+                                        <__container_names__>.*mariadb.*|.*optimus-prime.*</__container_names__>
+                                    </variables>
 
-    </build>
+                                    <testConfig>
+                                        <systemUnderTest>${systemUnderTest}</systemUnderTest>
+                                        <version>${version}</version>
+                                        <workload>${workload}</workload>
+                                        <testEnvironment>${testEnvironment}</testEnvironment>
+                                        <testRunId>${testRunId}</testRunId>
+                                        <buildResultsUrl>${buildResultsUrl}</buildResultsUrl>
+                                        <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
+                                        <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
+                                        <annotations>${annotations}</annotations>
+                                        <tags>${tags}</tags>
+                                    </testConfig>
+                                </eventConfig>
+                            </eventConfigs>
+                        </eventSchedulerConfig>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>nl.stokpop</groupId>
+                            <artifactId>test-events-wiremock</artifactId>
+                            <version>${test-events-wiremock.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>io.perfana</groupId>
+                            <artifactId>perfana-java-client</artifactId>
+                            <version>${perfana-java-client.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+
+        </build>
 
 
-    <!-- ************************************************************************ ==
-    == Below we have defined three sets of profiles, which control the type of    ==
-    == test that will be run and the targeted testEnvironment.                        ==
-    == If you wish to run a stress test on acceptance, use:                       ==
-    == mvn perfana-gatling:integration-test -Ptest-type-stress,test-env-acc       ==
-    == ************************************************************************ -->
+        <!-- ************************************************************************ ==
+        == Below we have defined three sets of profiles, which control the type of    ==
+        == test that will be run and the targeted testEnvironment.                        ==
+        == If you wish to run a stress test on acceptance, use:                       ==
+        == mvn perfana-gatling:integration-test -Ptest-type-stress,test-env-acc       ==
+        == ************************************************************************ -->
 
     <profiles>
 
