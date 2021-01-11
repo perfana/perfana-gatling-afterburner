@@ -23,7 +23,7 @@ pipeline {
 
                 script {
 
-                    git url: params.gatlingRepo, branch: "/refactor/plugins"
+                    git url: params.gatlingRepo, branch: "refactor/plugins"
 
                 }
 
