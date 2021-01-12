@@ -7,7 +7,7 @@ object CallMany {
 
   val call = exec(http("remote_call_async_immediate")
     .get("/remote/call-many?count=3&path=delay")
-    .header("perfana-request-name", "remote_call_async")
+    .header("perfana-request-name", "remote_call_async_immediate")
     .header("perfana-test-run-id", "${testRunId}")
     .check(status.is(200)))
 

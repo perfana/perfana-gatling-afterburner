@@ -15,7 +15,7 @@ object UploadFile {
                 StringBodyPart("upload", "test from gatling")
                   .fileName("gatling-upload.txt")
             )
-            .header("perfana-request-name", "upload-file")
+            .header("perfana-request-name", "upload-file_instant")
             .header("perfana-test-run-id", "${testRunId}")
 
         )

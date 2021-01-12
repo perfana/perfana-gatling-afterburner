@@ -10,7 +10,7 @@ object SimpleDelay {
 
   val call = exec(http("simple_delay_flow")
             .get("/delay?duration=555")
-            .header("perfana-request-name", "simple_delay")
+            .header("perfana-request-name", "simple_delay_flow")
             .header("perfana-test-run-id", "${testRunId}")
             .check(status.is(200)))
         
