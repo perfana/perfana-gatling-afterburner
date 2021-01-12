@@ -166,11 +166,11 @@
                             ${eventScheduleScript}
                         </scheduleScript>
                         <eventConfigs>
-<!--                            <eventConfig implementation="io.perfana.event.WiremockEventConfig">-->
-<!--                                    <enabled>${eventsEnabled}</enabled>-->
-<!--                                    <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>-->
-<!--                                    <wiremockUrl>${wiremockUrl}</wiremockUrl>-->
-<!--                            </eventConfig>-->
+                            <eventConfig implementation="nl.stokpop.event.wiremock.WiremockEventConfig">
+                                    <enabled>${eventsEnabled}</enabled>
+                                    <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
+                                    <wiremockUrl>${wiremockUrl}</wiremockUrl>
+                            </eventConfig>
                             <eventConfig implementation="io.perfana.event.PerfanaEventConfig">
                                 <name>PerfanaEvent</name>
                                 <perfanaUrl>${perfanaUrl}</perfanaUrl>
@@ -182,7 +182,7 @@
 <!--                                    </variable>-->
 <!--                                </variables>-->
                                     <variables>
-                                        <__container_names__>.*mariadb.*|.*optimus-prime.*</__container_names__>
+                                        <perfana-container_names>.*mariadb.*|.*optimus-prime.*</perfana-container_names>
                                     </variables>
 
                                     <testConfig>
