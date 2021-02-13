@@ -67,7 +67,7 @@
         <tags></tags>
 
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
-        <influxDbHost>influxdb</influxDbHost>
+        <influxDbHost>graphite</influxDbHost>
 
     </properties>
 
