@@ -67,7 +67,7 @@
         <tags></tags>
 
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
-        <influxDbHost>graphite</influxDbHost>
+        <influxDbHost>influxdb</influxDbHost>
 
     </properties>
 
@@ -315,7 +315,7 @@
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test</tags>
+                <tags>load-test,bol</tags>
             </properties>
         </profile>
 
