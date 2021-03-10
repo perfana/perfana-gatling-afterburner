@@ -23,7 +23,7 @@ pipeline {
 
                 script {
 
-                    git url: params.gatlingRepo, branch: params.system_under_test + "-jdbc-feeder"
+                    git url: params.gatlingRepo, branch: "graphite"
 
                 }
 
