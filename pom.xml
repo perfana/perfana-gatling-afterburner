@@ -153,8 +153,8 @@
 
                     <eventVariables>
                         <property>
-                            <name>$container_names</name>
-                            <value>.*mariadb.*|.*optimus-prime.*</value>
+                            <name>perfana-role</name>
+                            <value>Opt.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
