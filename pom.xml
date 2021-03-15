@@ -156,6 +156,10 @@
                             <name>perfana-role</name>
                             <value>Opt.*</value>
                         </property>
+                        <property>
+                            <name>perfana-simulation</name>
+                            <value>Opt.*|Meg.*|Star.*</value>
+                        </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
                     <eventScheduleScript>
