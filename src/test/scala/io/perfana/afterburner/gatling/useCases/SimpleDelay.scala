@@ -5,11 +5,15 @@ import io.gatling.http.Predef._
 
 import scala.collection.immutable.Map
 import scala.concurrent.duration._
+import scala.util.Random
+
 
 object SimpleDelay {
 
-  val call = exec(http("simple_delay")
-            .get("/delay?duration=555")
+  
+  val call = xec(session => session.set("randomDelay", Random.nextInt(20) + 490))
+            .exec(http("simple_delay")
+            .get("/delay?duration=${randomDelay}")
             .header("perfana-request-name", "simple_delay")
             .header("perfana-test-run-id", "${testRunId}")
             .check(status.is(200)))
