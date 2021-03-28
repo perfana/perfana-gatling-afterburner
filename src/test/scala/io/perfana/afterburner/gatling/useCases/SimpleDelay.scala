@@ -11,7 +11,7 @@ import scala.util.Random
 object SimpleDelay {
 
   
-  val call = xec(session => session.set("randomDelay", Random.nextInt(20) + 490))
+  val call = exec(session => session.set("randomDelay", Random.nextInt(20) + 490))
             .exec(http("simple_delay")
             .get("/delay?duration=${randomDelay}")
             .header("perfana-request-name", "simple_delay")
