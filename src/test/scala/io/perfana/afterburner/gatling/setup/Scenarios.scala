@@ -33,6 +33,7 @@ object Scenarios {
     .exec(CallMany.call)
     .pause(3)
     .exec(Database.call)
+    .exec(FlakyCall.call)
 
     
 
