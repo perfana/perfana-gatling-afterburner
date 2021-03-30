@@ -18,7 +18,7 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
-//    .feed(DatabaseFeeder.mariaDb)
+    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
 //    .exec(SimpleCpuBurn.call)
 //    .pause(3)
