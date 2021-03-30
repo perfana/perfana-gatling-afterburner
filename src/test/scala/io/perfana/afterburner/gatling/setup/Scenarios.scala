@@ -18,7 +18,7 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
-    .feed(DatabaseFeeder.mariaDb)
+//    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
 //    .exec(SimpleCpuBurn.call)
 //    .pause(3)
@@ -42,11 +42,15 @@ object Scenarios {
    */
   val debugScenario = scenario("debug")
     .exec(session => session.set("testRunId", Configuration.testRunId))
-    .feed(DatabaseFeeder.mariaDb)
-    .exitBlockOnFail(
-      pause(3)
-        .exec(Database.call)
-    )
+    .repeat(100) {
+      exec(FlakyCall.call)
+    }
+//
+//    .feed(DatabaseFeeder.mariaDb)
+//    .exitBlockOnFail(
+//      pause(3)
+//        .exec(Database.call)
+//    )
 
 
 }
