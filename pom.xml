@@ -9,14 +9,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
- 
+
         <encoding>UTF-8</encoding>
 
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.1.0-events-3</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.4.3</perfana-java-client.version>
-        <test-events-wiremock.version>1.1.2</test-events-wiremock.version>
+        <events-gatling-maven-plugin.version>3.1.0-events-2.0</events-gatling-maven-plugin.version>
+        <perfana-java-client.version>1.5.0</perfana-java-client.version>
+        <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -39,20 +39,17 @@
         <!-- Default scenario -->
         <scenario>acceptance</scenario>
 
-        <!-- Hostname for using in gatling.data.graphite.rootPreFix when running distributed test on Linux injectors-->
-        <hostname>${env.INJECTOR}</hostname>
+        <!-- By default assert test results -->
+        <assertResultsEnabled>true</assertResultsEnabled>
 
-        <!-- By default the scripts runs as master -->
-        <isMasterScript>true</isMasterScript>
-
-        <!-- By default don't send data to perfana -->
+        <!-- By default send data to perfana -->
         <perfanaEnabled>true</perfanaEnabled>
 
-        <!-- By default don't assert test results -->
-        <assertResultsEnabled>false</assertResultsEnabled>
+        <!-- By default disable wiremock -->
+        <wiremockEnabled>false</wiremockEnabled>
 
-        <!-- By default disable events -->
-        <eventsEnabled>false</eventsEnabled>
+        <!-- By default enable events -->
+        <eventsEnabled>true</eventsEnabled>
         <eventScheduleScript></eventScheduleScript>
 
         <!-- Default load settings -->
@@ -134,51 +131,14 @@
                 <groupId>nl.stokpop</groupId>
                 <artifactId>events-gatling-maven-plugin</artifactId>
                 <configuration>
-                    <dataFolder>src/test/resources/data</dataFolder>
                     <resultsFolder>target/gatling/results</resultsFolder>
-                    <bodiesFolder>src/test/resources/request-bodies</bodiesFolder>
                     <simulationsFolder>src/test/scala</simulationsFolder>
                     <noReports>true</noReports>
                     <simulationClass>${systemUnderTestSimulation}</simulationClass>
-                    <eventDebugEnabled>true</eventDebugEnabled>
-                    <eventSystemUnderTest>${systemUnderTest}</eventSystemUnderTest>
-                    <eventVersion>${version}</eventVersion>
-                    <eventWorkload>${workload}</eventWorkload>
-                    <eventTestEnvironment>${testEnvironment}</eventTestEnvironment>
-                    <eventTestRunId>${testRunId}</eventTestRunId>
-                    <eventBuildResultsUrl>${CIBuildResultsUrl}</eventBuildResultsUrl>
-                    <eventRampupTimeInSeconds>${rampupTimeInSeconds}</eventRampupTimeInSeconds>
-                    <eventConstantLoadTimeInSeconds>${constantLoadTimeInSeconds}</eventConstantLoadTimeInSeconds>
-                    <eventAnnotations>${annotations}</eventAnnotations>
-
-                   <eventVariables>
-                        <property>
-                            <name>$container_names</name>
-                            <value>.*optimus-prime-.*</value>
-                        </property>
-                    </eventVariables>
-                    <eventTags>${tags}</eventTags>
-                    <eventScheduleScript>
-                        ${eventScheduleScript}
-                    </eventScheduleScript>
-                    <events>
-                    <!-- here you can define events, with own properties per event,
-                         so you can form instance create two wiremock events with different wiremockUrls for example -->
-                    <MyWireMockEvent>
-                        <eventFactory>nl.stokpop.event.wiremock.WiremockEventFactory</eventFactory>
-                        <enabled>${eventsEnabled}</enabled>
-                        <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
-                        <wiremockUrl>${wiremockUrl}</wiremockUrl>
-                    </MyWireMockEvent>
-                    <MyPerfanaEvent>
-                        <eventFactory>io.perfana.event.PerfanaEventFactory</eventFactory>
-                        <enabled>${perfanaEnabled}</enabled>
-                        <perfanaUrl>${perfanaUrl}</perfanaUrl>
-                    </MyPerfanaEvent>
-                </events>
                     <jvmArgs>
                         <jvmArg>-Dscenario=${scenario}</jvmArg>
                         <jvmArg>-DtestRunId=${testRunId}</jvmArg>
+                        <jvmArg>-DtestEnvironment=${testEnvironment}</jvmArg>
                         <jvmArg>-DtargetBaseUrl=${targetBaseUrl}</jvmArg>
                         <jvmArg>-DinitialUsersPerSecond=${initialUsersPerSecond}</jvmArg>
                         <jvmArg>-DtargetUsersPerSecond=${targetUsersPerSecond}</jvmArg>
@@ -192,6 +152,44 @@
                         <jvmArg>-Xmx4g</jvmArg>
                     </jvmArgs>
                     <propagateSystemProperties>false</propagateSystemProperties>
+
+                    <eventSchedulerConfig>
+                        <debugEnabled>true</debugEnabled>
+                        <schedulerEnabled>${eventsEnabled}</schedulerEnabled>
+                        <failOnError>true</failOnError>
+                        <continueOnEventCheckFailure>true</continueOnEventCheckFailure>
+                        <scheduleScript>
+                            ${eventScheduleScript}
+                        </scheduleScript>
+                        <eventConfigs>
+                            <eventConfig implementation="nl.stokpop.event.wiremock.WiremockEventConfig">
+                                <enabled>${wiremockEnabled}</enabled>
+                                <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
+                                <wiremockUrl>${wiremockUrl}</wiremockUrl>
+                            </eventConfig>
+                            <eventConfig implementation="io.perfana.event.PerfanaEventConfig">
+                                <name>PerfanaEvent</name>
+                                <enabled>${perfanaEnabled}</enabled>
+                                <perfanaUrl>${perfanaUrl}</perfanaUrl>
+                                <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
+                                <variables>
+                                    <perfana-containers>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</perfana-containers>
+                                </variables>
+                                <testConfig>
+                                    <systemUnderTest>${systemUnderTest}</systemUnderTest>
+                                    <version>${version}</version>
+                                    <workload>${workload}</workload>
+                                    <testEnvironment>${testEnvironment}</testEnvironment>
+                                    <testRunId>${testRunId}</testRunId>
+                                    <buildResultsUrl>${CIBuildResultsUrl}</buildResultsUrl>
+                                    <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
+                                    <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
+                                    <annotations>${annotations}</annotations>
+                                    <tags>${tags}</tags>
+                                </testConfig>
+                            </eventConfig>
+                        </eventConfigs>
+                    </eventSchedulerConfig>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -207,7 +205,6 @@
                 </dependencies>
             </plugin>
         </plugins>
-
     </build>
 
 
@@ -294,7 +291,7 @@
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
-                <tags>stress-test</tags>
+                <tags>stress-test,micro-service</tags>
             </properties>
         </profile>
 
@@ -315,7 +312,7 @@
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>micro-service</tags>
+                <tags>load-test,micro-service</tags>
             </properties>
         </profile>
 
@@ -342,7 +339,7 @@
                     PT4M|wiremock-change-delay(delay=12000)|delay=12000
                     PT5M|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test,perfana-demo-host</tags>
+                <tags>load-test,micro-service</tags>
             </properties>
         </profile>
 
