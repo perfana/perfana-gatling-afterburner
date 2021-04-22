@@ -18,18 +18,22 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
-    .exec(session => session.set("testRunId", Configuration.testRunId))  
-    .exec(SimpleCpuBurn.call)
-    .pause(3)
-    .exec(SimpleDelay.call)
+    .feed(DatabaseFeeder.mariaDb)
+    .exec(session => session.set("testRunId", Configuration.testRunId))
+//    .exec(SimpleCpuBurn.call)
+//    .pause(3)
+//    .exec(SimpleDelay.call)
 //    .pause(3)
 //    .exec(SimpleMiniLeak.call)
-    .pause(3)
-    .exec(UploadFile.call)
-    .pause(3)
-    .exec(RemoteDelay.call)
-    .pause(3)
+//    .pause(3)
+//    .exec(UploadFile.call)
+//    .pause(3)
+//    .exec(RemoteDelay.call)
+//    .pause(3)
     .exec(CallMany.call)
+    .pause(3)
+    .exec(Database.call)
+    .exec(FlakyCall.call)
 
     
 
@@ -37,9 +41,16 @@ object Scenarios {
    * These are the scenarios run in 'debug' mode.
    */
   val debugScenario = scenario("debug")
-    .exitBlockOnFail(
-      exec(SimpleCpuBurn.call)
-    )
+    .exec(session => session.set("testRunId", Configuration.testRunId))
+    .repeat(100) {
+      exec(FlakyCall.call)
+    }
+//
+//    .feed(DatabaseFeeder.mariaDb)
+//    .exitBlockOnFail(
+//      pause(3)
+//        .exec(Database.call)
+//    )
 
 
 }

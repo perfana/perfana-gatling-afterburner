@@ -14,9 +14,9 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.0.3-events-7</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.4.1</perfana-java-client.version>
-        <test-events-wiremock.version>1.1.1</test-events-wiremock.version>
+        <events-gatling-maven-plugin.version>3.1.0-events-3</events-gatling-maven-plugin.version>
+        <perfana-java-client.version>1.4.3</perfana-java-client.version>
+        <test-events-wiremock.version>1.1.2</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -87,6 +87,11 @@
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.6.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -135,7 +140,6 @@
                     <simulationsFolder>src/test/scala</simulationsFolder>
                     <noReports>true</noReports>
                     <simulationClass>${systemUnderTestSimulation}</simulationClass>
-
                     <eventDebugEnabled>true</eventDebugEnabled>
                     <eventSystemUnderTest>${systemUnderTest}</eventSystemUnderTest>
                     <eventVersion>${version}</eventVersion>
@@ -168,7 +172,7 @@
                     </MyWireMockEvent>
                     <MyPerfanaEvent>
                         <eventFactory>io.perfana.event.PerfanaEventFactory</eventFactory>
-                        <enabled>true</enabled>
+                        <enabled>${perfanaEnabled}</enabled>
                         <perfanaUrl>${perfanaUrl}</perfanaUrl>
                     </MyPerfanaEvent>
                 </events>
@@ -268,7 +272,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <perfanaUrl>http://perfana.svc.cluster.local:3000</perfanaUrl>
+                <perfanaUrl>http://perfana.perfana.svc.cluster.local</perfanaUrl>
                 <wiremockUrl>http://wiremock.perfana.svc.cluster.local:8080</wiremockUrl>
                 <influxDbHost>influxdb.perfana.svc.cluster.local</influxDbHost>
             </properties>
@@ -311,7 +315,7 @@
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test</tags>
+                <tags>micro-service</tags>
             </properties>
         </profile>
 
@@ -400,8 +404,10 @@
             </activation>
             <properties>
                 <debug>true</debug>
+                <perfanaEnabled>false</perfanaEnabled>
                 <graphitePrefix>gatling2.debug</graphitePrefix>
                 <scenario>debug</scenario>
+                <perfanaUrl>http://localhost:4000</perfanaUrl>
             </properties>
         </profile>
 
