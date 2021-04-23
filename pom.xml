@@ -294,7 +294,7 @@
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
-                <tags>stress-test</tags>
+                <tags>stress-test,micro-service</tags>
             </properties>
         </profile>
 
