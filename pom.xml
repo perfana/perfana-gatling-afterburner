@@ -19,7 +19,7 @@
         <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
 
         <!-- Perfana url  -->
-        <perfanaUrl>http://perfana:3000</perfanaUrl>
+        <perfanaUrl>https://demo.cloud.perfana.io</perfanaUrl>
 
         <!-- Default Simulation class  -->
         <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.OptimusPrime</systemUnderTestSimulation>
