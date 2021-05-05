@@ -64,7 +64,7 @@
         <tags></tags>
 
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
-        <influxDbHost>influxdb</influxDbHost>
+        <influxDbHost>influxdb.cloud.perfana.io</influxDbHost>
 
     </properties>
 
