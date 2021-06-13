@@ -329,7 +329,7 @@
                 <rampupTimeInSeconds>60</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>300</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
-                <wiremockEnabled>false</wiremockEnabled>
+                <wiremockEnabled>true</wiremockEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
                 <eventsEnabled>true</eventsEnabled>
