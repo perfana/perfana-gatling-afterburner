@@ -35,7 +35,17 @@ object Scenarios {
     .exec(Database.call)
     .exec(FlakyCall.call)
 
-    
+  val slowBackendTestScenario = scenario("Slow backend test")
+    .feed(DatabaseFeeder.mariaDb)
+    .exec(session => session.set("testRunId", Configuration.testRunId))
+    .exec(RemoteDelay.call)
+    .pause(3)
+    .exec(CallMany.call)
+    .pause(3)
+    .exec(Database.call)
+    .exec(FlakyCall.call)
+
+
 
   /**
    * These are the scenarios run in 'debug' mode.

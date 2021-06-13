@@ -322,6 +322,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
+                <scenario>slowbackend</scenario>
                 <workload>slowBackendTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
