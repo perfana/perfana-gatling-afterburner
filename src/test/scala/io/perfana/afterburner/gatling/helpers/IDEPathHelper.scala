@@ -1,27 +1,25 @@
 package io.perfana.afterburner.gatling.helpers
 
-import java.nio.file.Path
-
-import io.gatling.commons.util.PathHelper._
+import java.nio.file.{Path, Paths}
 
 /**
   * Utility object to create the paths used throughout this loadtest script.
   */
 object IDEPathHelper {
 
-  val gatlingConfUrl: Path = getClass.getClassLoader.getResource("gatling.conf").toURI
-  val projectRootDir = gatlingConfUrl.ancestor(3)
+	private val gatlingConfUrl: Path = Paths.get(getClass.getClassLoader.getResource("gatling.conf").toURI)
+	private val projectRootDir = gatlingConfUrl.getParent.getParent.getParent
+	private val mavenTargetDirectory = projectRootDir.resolve("target")
 
-  val mavenSourcesDirectory = projectRootDir / "src" / "test" / "scala"
-  val mavenResourcesDirectory = projectRootDir / "src" / "test" / "resources"
-  val mavenTargetDirectory = projectRootDir / "target"
-  val mavenBinariesDirectory = mavenTargetDirectory / "test-classes"
+    private val mavenSrcTestDirectory = projectRootDir.resolve("src").resolve("test")
 
-  val dataDirectory = mavenResourcesDirectory / "data"
-  val bodiesDirectory = mavenResourcesDirectory / "request-bodies"
+    val mavenSourcesDirectory = mavenSrcTestDirectory.resolve("scala")
+    val mavenResourcesDirectory = mavenSrcTestDirectory.resolve("resources")
+    val mavenBinariesDirectory = mavenTargetDirectory.resolve("test-classes")
+    val resultsDirectory = mavenTargetDirectory.resolve("gatling")
+	val recorderOutputDirectory = mavenSourcesDirectory
+    val recorderConfigFile = mavenResourcesDirectory.resolve("recorder.conf")
 
-  val recorderOutputDirectory = mavenSourcesDirectory
-  val resultsDirectory = mavenTargetDirectory / "results"
-
-  val recorderConfigFile = mavenResourcesDirectory / "recorder.conf"
+	val dataDirectory = mavenResourcesDirectory.resolve("data")
+	val bodiesDirectory = mavenResourcesDirectory.resolve("bodies")
 }
