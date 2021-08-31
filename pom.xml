@@ -13,10 +13,10 @@
         <encoding>UTF-8</encoding>
 
         <!-- dependency versioning -->
-        <gatling.version>3.6.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.1.2-events-1-SNAPSHOT</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.6.0</perfana-java-client.version>
-        <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
+        <gatling.version>3.3.1</gatling.version>
+        <events-gatling-maven-plugin.version>3.1.0-events-3</events-gatling-maven-plugin.version>
+        <perfana-java-client.version>1.4.3</perfana-java-client.version>
+        <test-events-wiremock.version>1.1.2</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>2.7.4</version>
+            <version>2.6.2</version>
         </dependency>
     </dependencies>
 
@@ -154,7 +154,7 @@
                     <eventVariables>
                         <property>
                             <name>$container_names</name>
-                            <value>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</value>
+                            <value>.*mariadb.*|.*optimus-prime.*</value>
                         </property>
                     </eventVariables>
                     <eventTags>${tags}</eventTags>
@@ -294,7 +294,7 @@
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
-                <tags>stress-test</tags>
+                <tags>micro-service</tags>
             </properties>
         </profile>
 
