@@ -51,7 +51,7 @@ pipeline {
                       withCredentials([string(credentialsId: 'PERFANA-API-KEY', variable: 'TOKEN')]) {
 
                           sh """
-                             ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DperfanaApiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
+                             ${mvnHome}/bin/mvn clean install -U -X events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DperfanaApiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
                           """
                      }
                 }
