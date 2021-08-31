@@ -48,9 +48,12 @@ pipeline {
 
                     def mvnHome = tool 'M3'
 
-                    sh """
-                       ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
-                    """
+                      withCredentials([string(credentialsId: 'PERFANA-API-KEY', variable: 'PERFANA-API-KEY')]) {
+
+                          sh """
+                             ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DperfanaApiKey=$PERFANA-API-KEY -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
+                          """
+                     }
                 }
             }
 
