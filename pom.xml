@@ -15,11 +15,11 @@
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
         <events-gatling-maven-plugin.version>3.1.0-events-2.1</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.5.0</perfana-java-client.version>
+        <perfana-java-client.version>1.6.0</perfana-java-client.version>
         <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
 
         <!-- Perfana url  -->
-        <perfanaUrl>http://perfana:3000</perfanaUrl>
+        <perfanaUrl>http://perfana:4000</perfanaUrl>
 
         <!-- Default Simulation class  -->
         <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.OptimusPrime</systemUnderTestSimulation>
@@ -59,9 +59,10 @@
         <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
 
         <!-- Settings for the Perfana Dashboard -->
-        <systemUnderTest>Afterburner</systemUnderTest>
+        <systemUnderTest>OptimusPrime</systemUnderTest>
         <version>1.0</version>
         <tags></tags>
+        <apiKey></apiKey>
 
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
         <influxDbHost>influxdb</influxDbHost>
@@ -171,6 +172,7 @@
                                 <name>PerfanaEvent</name>
                                 <enabled>${perfanaEnabled}</enabled>
                                 <perfanaUrl>${perfanaUrl}</perfanaUrl>
+                                <apiKey>${apiKey}</apiKey>
                                 <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
                                 <variables>
                                     <perfana-containers>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</perfana-containers>
@@ -225,7 +227,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <targetBaseUrl>http://localhost:8080</targetBaseUrl>
+                <targetBaseUrl>http://localhost:8090</targetBaseUrl>
                 <testEnvironment>local</testEnvironment>
             </properties>
         </profile>
@@ -290,7 +292,7 @@
                 <rampupTimeInSeconds>1800</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
-                <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
+                <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <tags>stress-test,micro-service</tags>
             </properties>
         </profile>
@@ -305,7 +307,7 @@
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
                 <rampupTimeInSeconds>30</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
+                <constantLoadTimeInSeconds>30</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
