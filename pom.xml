@@ -307,7 +307,7 @@
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
                 <rampupTimeInSeconds>30</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>30</constantLoadTimeInSeconds>
+                <constantLoadTimeInSeconds>270</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
