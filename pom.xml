@@ -62,7 +62,7 @@
         <systemUnderTest>Afterburner</systemUnderTest>
         <version>1.0</version>
         <tags></tags>
-
+        <apiKey></apiKey>
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
         <influxDbHost>influxdb</influxDbHost>
 
@@ -171,7 +171,7 @@
                                 <name>PerfanaEvent</name>
                                 <enabled>${perfanaEnabled}</enabled>
                                 <perfanaUrl>${perfanaUrl}</perfanaUrl>
-                                <perfanaApiKey>${perfanaApiKey}</perfanaApiKey>
+                                <apiKey>${apiKey}</apiKey>
                                 <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
                                 <variables>
                                     <perfana-containers>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</perfana-containers>
