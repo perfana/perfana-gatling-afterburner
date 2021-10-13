@@ -10,7 +10,7 @@ import scala.concurrent.duration._
  * This object collects the Scenarios in the project for use in the Simulation. There are two
  * main properties in this object: acceptanceTestScenario and debugScenario. These two are
  * used in the Simulation class to setup the actual tests to run. If you wish to add
- * scenarios to either run, add them here. 
+ * scenarios to either run, add them here.
  */
 object Scenarios {
 
@@ -20,8 +20,8 @@ object Scenarios {
   val acceptanceTestScenario = scenario("Acceptance test")
     .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
-//    .exec(SimpleCpuBurn.call)
-//    .pause(3)
+    .exec(SimpleCpuBurn.call)
+    .pause(3)
 //    .exec(SimpleDelay.call)
 //    .pause(3)
 //    .exec(SimpleMiniLeak.call)
