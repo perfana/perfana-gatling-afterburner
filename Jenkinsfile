@@ -23,7 +23,7 @@ pipeline {
 
                 script {
 
-                    git url: params.gatlingRepo, branch: OptimusPrimeTwo
+                    git url: params.gatlingRepo, branch: 'OptimusPrimeTwo'
 
                 }
 
