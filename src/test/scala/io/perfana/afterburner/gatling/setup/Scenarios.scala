@@ -22,7 +22,7 @@ object Scenarios {
     .exec(session => session.set("testRunId", Configuration.testRunId))
      .exec(SimpleCpuBurn.call)
      .pause(2)
-     .exec(SimpleDelay.call)
+     .exec(SecuredDelay.call)
      .pause(2)
 //    .exec(SimpleMiniLeak.call)
 //    .pause(3)

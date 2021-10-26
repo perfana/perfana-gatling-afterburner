@@ -9,7 +9,7 @@ import scala.concurrent.duration._
 object SimpleCpuBurn {
 
   val call = exec(http("simple_cpu_burn")
-            .get("/cpu/magic-identity-check?matrixSize=100")
+            .get("/cpu/magic-identity-check?matrixSize=160")
             .header("perfana-request-name", "simple_cpu_burn")
             .header("perfana-test-run-id", "${testRunId}")
             .check(status.is(200)))

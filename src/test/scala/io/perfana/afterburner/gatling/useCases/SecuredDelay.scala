@@ -3,7 +3,7 @@ package io.perfana.afterburner.gatling.useCases
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-object SecureDelay {
+object SecuredDelay {
 
   val call = exec(http("simple_delay")
             .get("/secured-delay?duration=200")
