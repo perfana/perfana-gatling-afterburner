@@ -3,15 +3,13 @@ package io.perfana.afterburner.gatling.useCases
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-import scala.collection.immutable.Map
-import scala.concurrent.duration._
-
-object SimpleDelay {
+object SecureDelay {
 
   val call = exec(http("simple_delay")
-            .get("/delay?duration=200")
+            .get("/secured-delay?duration=200")
             .header("perfana-request-name", "simple_delay")
             .header("perfana-test-run-id", "${testRunId}")
+            .basicAuth("pipo","test123")
             .check(status.is(200)))
         
 }
