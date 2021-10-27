@@ -302,7 +302,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <workload>loadTest</workload>
+                <workload>loadTest-demo</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
                 <rampupTimeInSeconds>30</rampupTimeInSeconds>
