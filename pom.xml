@@ -62,7 +62,6 @@
         <systemUnderTest>Afterburner</systemUnderTest>
         <version>1.0</version>
         <tags></tags>
-        <apiKey></apiKey>
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
         <influxDbHost>influxdb</influxDbHost>
 
