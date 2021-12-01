@@ -193,7 +193,7 @@
                             <eventConfig implementation="nl.stokpop.helloworld.event.StokpopHelloEventConfig">
                                 <name>StokpopHelloEvent1</name>
                                 <helloInitialSleepSeconds>0</helloInitialSleepSeconds>
-                                <actuatorBaseUrl>http://optimus-prime-fe/actuator</actuatorBaseUrl>
+                                <actuatorBaseUrl>http://optimus-prime-fe:8080/actuator</actuatorBaseUrl>
                                 <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS</actuatorEnvProperties>
                             </eventConfig>
                         </eventConfigs>
