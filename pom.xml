@@ -17,6 +17,7 @@
         <events-gatling-maven-plugin.version>3.1.0-events-2.1</events-gatling-maven-plugin.version>
         <perfana-java-client.version>1.6.0</perfana-java-client.version>
         <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
+        <test-events-hello-world.version>1.2.0-SNAPSHOT</test-events-hello-world.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -189,6 +190,12 @@
                                     <tags>${tags}</tags>
                                 </testConfig>
                             </eventConfig>
+                            <eventConfig implementation="nl.stokpop.helloworld.event.StokpopHelloEventConfig">
+                                <name>StokpopHelloEvent1</name>
+                                <helloInitialSleepSeconds>0</helloInitialSleepSeconds>
+                                <actuatorBaseUrl>http://optimus-prime-fe/actuator</actuatorBaseUrl>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS</actuatorEnvProperties>
+                            </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
                 </configuration>
@@ -202,6 +209,11 @@
                         <groupId>io.perfana</groupId>
                         <artifactId>perfana-java-client</artifactId>
                         <version>${perfana-java-client.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>nl.stokpop</groupId>
+                        <artifactId>test-events-hello-world</artifactId>
+                        <version>${test-events-hello-world.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
