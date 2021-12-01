@@ -191,10 +191,18 @@
                                 </testConfig>
                             </eventConfig>
                             <eventConfig implementation="nl.stokpop.helloworld.event.StokpopHelloEventConfig">
-                                <name>StokpopHelloEvent1</name>
+                                <name>ActuatorEventFrontend</name>
                                 <helloInitialSleepSeconds>0</helloInitialSleepSeconds>
+                                <actuatorPropPrefix>optimus-prime-fe</actuatorPropPrefix>
                                 <actuatorBaseUrl>http://optimus-prime-fe:8080/actuator</actuatorBaseUrl>
-                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS</actuatorEnvProperties>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size</actuatorEnvProperties>
+                            </eventConfig>
+                            <eventConfig implementation="nl.stokpop.helloworld.event.StokpopHelloEventConfig">
+                                <name>ActuatorEventBackend</name>
+                                <helloInitialSleepSeconds>0</helloInitialSleepSeconds>
+                                <actuatorPropPrefix>optimus-prime-be</actuatorPropPrefix>
+                                <actuatorBaseUrl>http://optimus-prime-be:8080/actuator</actuatorBaseUrl>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size</actuatorEnvProperties>
                             </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
