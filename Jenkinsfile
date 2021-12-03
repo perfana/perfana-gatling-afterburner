@@ -6,7 +6,7 @@ pipeline {
    agent any
 
     parameters {
-        string(name: 'system_under_test', defaultValue: 'MegaTron', description: 'Name used as System Under Test in Perfana')
+        string(name: 'system_under_test', defaultValue: 'Afterburner', description: 'Name used as System Under Test in Perfana')
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend'], description: 'Workload profile to use in your Gatling script')
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
