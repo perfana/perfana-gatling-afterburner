@@ -52,9 +52,9 @@ object Scenarios {
     .pause(3)
     .exec(SimpleDelay.call)
     .pause(3)
-    .exec(SimpleMiniLeak.call)
+    .exec(CallMany.call)
     .pause(3)
-
+    .exec(Database.call)
 
   /**
    * These are the scenarios run in 'debug' mode.
