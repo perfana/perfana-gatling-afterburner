@@ -346,9 +346,9 @@
                 <scenario>cpu</scenario>
                 <workload>loadTestCpu</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>10</targetUsersPerSecond>
+                <targetUsersPerSecond>4</targetUsersPerSecond>
                 <rampupTimeInSeconds>20</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>180</constantLoadTimeInSeconds>
+                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
