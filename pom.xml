@@ -338,6 +338,25 @@
         </profile>
 
         <profile>
+            <id>test-type-cpu</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <scenario>cpu</scenario>
+                <workload>loadTestCpu</workload>
+                <initialUsersPerSecond>1</initialUsersPerSecond>
+                <targetUsersPerSecond>10</targetUsersPerSecond>
+                <rampupTimeInSeconds>20</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>180</constantLoadTimeInSeconds>
+                <perfanaEnabled>true</perfanaEnabled>
+                <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
+                <eventsEnabled>true</eventsEnabled>
+                <tags>load-test,micro-service</tags>
+            </properties>
+        </profile>
+
+        <profile>
             <id>test-type-slow-backend</id>
             <activation>
                 <activeByDefault>false</activeByDefault>

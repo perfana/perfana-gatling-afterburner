@@ -45,6 +45,15 @@ object Scenarios {
     .exec(Database.call)
     .exec(FlakyCall.call)
 
+  val cpuTestScenario = scenario("CPU test")
+    .feed(DatabaseFeeder.mariaDb)
+    .exec(session => session.set("testRunId", Configuration.testRunId))
+    .exec(SimpleCpuBurnPlus.call)
+    .pause(3)
+    .exec(SimpleDelay.call)
+    .pause(3)
+    .exec(SimpleMiniLeak.call)
+    .pause(3)
 
 
   /**
