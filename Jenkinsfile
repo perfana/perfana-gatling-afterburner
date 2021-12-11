@@ -59,7 +59,7 @@ pipeline {
                     }
 
                     sh """
-                       kill -INT $G2IPID &&
+                       kill -INT \$G2IPID &&
                     """
                 }
             }
