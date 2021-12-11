@@ -49,7 +49,7 @@ pipeline {
                     def mvnHome = tool 'M3'
 
                     sh """
-                      G2IPID=$(g2i ./results -a http://influxdb:8086 -b gatling3 --test-environment acc --system-under-test -d | awk '{print $2}') && \
+                      G2IPID=\$(g2i ./results -a http://influxdb:8086 -b gatling3 --test-environment acc --system-under-test -d | awk '{print \$2}') && \
                     """
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
