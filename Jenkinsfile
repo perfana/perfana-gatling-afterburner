@@ -49,7 +49,7 @@ pipeline {
                     def mvnHome = tool 'M3'
 
                     sh """
-                      G2IPID=\$(./g2i ./results -a http://influxdb:8086 -b gatling3 -t acc -y -d | awk '{print \$2}')
+                       G2IPID = sh(script: "./g2i ./results -a http://influxdb:8086 -b gatling3 -t acc -y OptimusPrime -d | awk '{print \$2}'", returnStdout: true)
                     """
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
