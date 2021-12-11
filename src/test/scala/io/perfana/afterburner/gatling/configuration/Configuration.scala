@@ -44,6 +44,7 @@ object Configuration {
     case "debug" => Scenarios.debugScenario
     case "acceptance"  => Scenarios.acceptanceTestScenario
     case "slowbackend"  => Scenarios.slowBackendTestScenario
+    case "cpu"  => Scenarios.cpuTestScenario
 
     case _ => Scenarios.acceptanceTestScenario
 
