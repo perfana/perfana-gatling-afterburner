@@ -35,7 +35,6 @@ pipeline {
 
             steps {
 
-                timestamps {
                   logstash {
                     script {
 
@@ -64,7 +63,6 @@ pipeline {
                         """
                     }
                   }
-                }
             }
         }
     }
