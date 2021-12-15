@@ -67,6 +67,8 @@
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
         <influxDbHost>influxdb</influxDbHost>
 
+        <logback.configurationFile>logback.xml</logback.configurationFile>
+
     </properties>
 
     <dependencyManagement>
@@ -151,6 +153,7 @@
                         <jvmArg>-Dgatling.data.graphite.host=${influxDbHost}</jvmArg>
                         <jvmArg>-Xms1g</jvmArg>
                         <jvmArg>-Xmx4g</jvmArg>
+                        <jvmArg>-Dlogback.configurationFile=${logback.configurationFile}</jvmArg>
                     </jvmArgs>
                     <propagateSystemProperties>false</propagateSystemProperties>
 
