@@ -30,7 +30,7 @@
 		<headers>
 			<header>
 				<name>Content-Type</name>
-				<value>application/json</value>
+				<value>text/plain</value>
 			</header>
 		</headers>
 	</appender>
