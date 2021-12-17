@@ -35,7 +35,7 @@ pipeline {
 
             steps {
 
-                  logstash {
+//                   logstash {
                     script {
 
                         def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
@@ -62,7 +62,7 @@ pipeline {
                            kill -INT ${G2IPID}
                         """
                     }
-                  }
+//                   }
             }
         }
     }
