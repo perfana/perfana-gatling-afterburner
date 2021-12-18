@@ -20,7 +20,7 @@
 		</headers>
 	</appender>
 
-	<logger name="io.gatling.http.engine.response" level="${logLevel}"/>
+	<logger name="io.gatling.http.engine.response" level="DEBUG"/>
 
 	<appender name="ASYNC ELK" class="ch.qos.logback.classic.AsyncAppender">
 		<appender-ref ref="ELASTIC"/>
