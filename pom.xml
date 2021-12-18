@@ -93,9 +93,9 @@
             <version>2.6.2</version>
         </dependency>
         <dependency>
-            <groupId>com.internetitem</groupId>
-            <artifactId>logback-elasticsearch-appender</artifactId>
-            <version>1.6</version>
+            <groupId>io.github.amerousful</groupId>
+            <artifactId>gatling-elasticsearch-logs</artifactId>
+            <version>0.7</version>
         </dependency>
     </dependencies>
 
