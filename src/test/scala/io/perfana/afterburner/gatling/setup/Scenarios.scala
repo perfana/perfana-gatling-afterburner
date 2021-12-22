@@ -34,6 +34,7 @@ object Scenarios {
     .pause(3)
     .exec(Database.call)
     .exec(FlakyCall.call)
+    .exec(GroupedCalls.call)
 
   val slowBackendTestScenario = scenario("Slow backend test")
     .feed(DatabaseFeeder.mariaDb)
