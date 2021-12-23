@@ -146,6 +146,7 @@
                     <jvmArgs>
                         <jvmArg>-Dscenario=${scenario}</jvmArg>
                         <jvmArg>-DtestRunId=${testRunId}</jvmArg>
+                        <jvmArg>-systemUnderTest=${systemUnderTest}</jvmArg>
                         <jvmArg>-DtestEnvironment=${testEnvironment}</jvmArg>
                         <jvmArg>-DtargetBaseUrl=${targetBaseUrl}</jvmArg>
                         <jvmArg>-DinitialUsersPerSecond=${initialUsersPerSecond}</jvmArg>
