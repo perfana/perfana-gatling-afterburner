@@ -8,11 +8,22 @@
 			<onMismatch>DENY</onMismatch>
 		</filter>
 		<url>http://elastic:b8b4d84f782dc887af781265f138089f@elasticsearch:9200/_bulk</url>
-<authentication class="com.internetitem.logback.elasticsearch.config.BasicAuthentication" />
+		<authentication class="com.internetitem.logback.elasticsearch.config.BasicAuthentication" />
 		<index>gatling-%date{yyyy.MM.dd}</index>
 		<type>gatling</type>
 		<errorsToStderr>true</errorsToStderr>
-
+		<properties>
+			<property>
+				<name>systemUnderTest</name>
+				<value>${systemUnderTest}</value>
+				<allowEmpty>false</allowEmpty>
+			</property>
+			<property>
+				<name>testEnvironment</name>
+				<value>${testEnvironment}</value>
+				<allowEmpty>false</allowEmpty>
+			</property>
+		</properties>
 		<headers>
 			<header>
 				<name>Content-Type</name>
