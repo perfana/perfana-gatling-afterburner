@@ -14,10 +14,11 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.1.0-events-2.1</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.6.1-SNAPSHOT</perfana-java-client.version>
-        <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
-        <test-events-hello-world.version>1.2.1</test-events-hello-world.version>
+        <events-gatling-maven-plugin.version>4.1.0-events-1</events-gatling-maven-plugin.version>
+        <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
+        <perfana-java-client.version>2.0.1-SNAPSHOT</perfana-java-client.version>
+        <test-events-wiremock.version>2.0.0-SNAPSHOT</test-events-wiremock.version>
+        <test-events-hello-world.version>2.0.0-SNAPSHOT</test-events-hello-world.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -88,7 +89,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>2.6.2</version>
+            <version>2.7.3</version>
         </dependency>
     </dependencies>
 
@@ -100,11 +101,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>nl.stokpop</groupId>
-                    <artifactId>events-gatling-maven-plugin</artifactId>
-                    <version>${events-gatling-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -129,8 +125,34 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>nl.stokpop</groupId>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${scala-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <jvmArgs>
+                                <jvmArg>-Xss100M</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <arg>-target:jvm-1.8</arg>
+                                <arg>-deprecation</arg>
+                                <arg>-feature</arg>
+                                <arg>-unchecked</arg>
+                                <arg>-language:implicitConversions</arg>
+                                <arg>-language:postfixOps</arg>
+                            </args>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.perfana</groupId>
                 <artifactId>events-gatling-maven-plugin</artifactId>
+                <version>${events-gatling-maven-plugin.version}</version>
                 <configuration>
                     <resultsFolder>target/gatling/results</resultsFolder>
                     <simulationsFolder>src/test/scala</simulationsFolder>
@@ -163,7 +185,7 @@
                             ${eventScheduleScript}
                         </scheduleScript>
                         <eventConfigs>
-                            <eventConfig implementation="nl.stokpop.event.wiremock.WiremockEventConfig">
+                            <eventConfig implementation="io.perfana.event.wiremock.WiremockEventConfig">
                                 <enabled>${wiremockEnabled}</enabled>
                                 <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
                                 <wiremockUrl>${wiremockUrl}</wiremockUrl>
@@ -190,14 +212,14 @@
                                     <tags>${tags}</tags>
                                 </testConfig>
                             </eventConfig>
-                            <eventConfig implementation="nl.stokpop.helloworld.event.StokpopHelloEventConfig">
+                            <eventConfig implementation="io.perfana.helloworld.event.HelloWorldEventConfig">
                                 <name>ActuatorEventFrontend</name>
                                 <helloInitialSleepSeconds>0</helloInitialSleepSeconds>
                                 <actuatorPropPrefix>optimus-prime-fe</actuatorPropPrefix>
                                 <actuatorBaseUrl>http://optimus-prime-fe:8080/actuator</actuatorBaseUrl>
                                 <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size,featureToggleIdentityMatrix</actuatorEnvProperties>
                             </eventConfig>
-                            <eventConfig implementation="nl.stokpop.helloworld.event.StokpopHelloEventConfig">
+                            <eventConfig implementation="io.perfana.helloworld.event.HelloWorldEventConfig">
                                 <name>ActuatorEventBackend</name>
                                 <helloInitialSleepSeconds>0</helloInitialSleepSeconds>
                                 <actuatorPropPrefix>optimus-prime-be</actuatorPropPrefix>
@@ -209,7 +231,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>nl.stokpop</groupId>
+                        <groupId>io.perfana</groupId>
                         <artifactId>test-events-wiremock</artifactId>
                         <version>${test-events-wiremock.version}</version>
                     </dependency>
@@ -219,7 +241,7 @@
                         <version>${perfana-java-client.version}</version>
                     </dependency>
                     <dependency>
-                        <groupId>nl.stokpop</groupId>
+                        <groupId>io.perfana</groupId>
                         <artifactId>test-events-hello-world</artifactId>
                         <version>${test-events-hello-world.version}</version>
                     </dependency>
