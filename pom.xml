@@ -8,7 +8,7 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>snapshots-repo</id>
+            <id>sonatype-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <releases><enabled>false</enabled></releases>
             <snapshots><enabled>true</enabled></snapshots>
@@ -21,7 +21,7 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.5.0-events-1-SNAPSHOT</events-gatling-maven-plugin.version>
+        <events-jmeter-maven-plugin.version>3.5.0-events-1-SNAPSHOT</events-jmeter-maven-plugin.version>
         <perfana-java-client.version>2.0.1</perfana-java-client.version>
         <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
 
@@ -109,8 +109,8 @@
                 </plugin>
                 <plugin>
                     <groupId>io.perfana</groupId>
-                    <artifactId>events-gatling-maven-plugin</artifactId>
-                    <version>${events-gatling-maven-plugin.version}</version>
+                    <artifactId>events-jmeter-maven-plugin</artifactId>
+                    <version>${events-jmeter-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
