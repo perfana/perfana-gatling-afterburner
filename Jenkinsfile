@@ -10,7 +10,9 @@ pipeline {
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend'], description: 'Workload profile to use in your Gatling script')
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
-        string(name: 'targetBaseUrl', defaultValue: 'http://star-scream-fe:8080', description: 'Target Url')
+        string(name: 'targetDomain', defaultValue: 'star-scream-fe', description: 'Target domain')
+        string(name: 'targetPort', defaultValue: '8080', description: 'Target port')
+        string(name: 'targetProtocol', defaultValue: 'http', description: 'Target protocol')
         booleanParam(name: 'kubernetes', defaultValue: false, description: 'Run in Kubernetes')
 
     }
@@ -51,7 +53,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
                         sh """
-                           ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
+                           ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=$TOKEN -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
                         """
                     }
 

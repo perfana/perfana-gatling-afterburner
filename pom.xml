@@ -138,6 +138,13 @@
                 <groupId>io.perfana</groupId>
                 <artifactId>events-jmeter-maven-plugin</artifactId>
                 <executions>
+                    <!--- needed to generate target/config.json -->
+                    <execution>
+                        <id>configuration</id>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
                     <!-- Run JMeter tests -->
                     <execution>
                         <id>jmeter-tests</id>
@@ -152,16 +159,14 @@
                             <goal>results</goal>
                         </goals>
                     </execution>
-                    <!--- needed to generate target/config.json -->
-                    <execution>
-                        <id>configuration</id>
-                        <goals>
-                            <goal>configure</goal>
-                        </goals>
-                    </execution>
                 </executions>
                 <configuration>
                     <errorRateThresholdInPercent>2</errorRateThresholdInPercent>
+                    <propertiesUser>
+                        <targetDomain>${targetDomain}</targetDomain>
+                        <targetPort>${targetPort}</targetPort>
+                        <targetProtocol>${targetProtocol}</targetProtocol>
+                    </propertiesUser>
                     <eventSchedulerConfig>
                         <debugEnabled>true</debugEnabled>
                         <schedulerEnabled>${eventsEnabled}</schedulerEnabled>
