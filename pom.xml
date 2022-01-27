@@ -2,8 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
-
     <groupId>io.perfana</groupId>
     <artifactId>gatling-afterburner</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -14,9 +12,9 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.1.0-events-2.1</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.6.0</perfana-java-client.version>
-        <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
+        <events-gatling-maven-plugin.version>3.5.0-events-1-SNAPSHOT</events-gatling-maven-plugin.version>
+        <perfana-java-client.version>2.0.1</perfana-java-client.version>
+        <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -87,7 +85,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>2.6.2</version>
+            <version>2.7.3</version>
         </dependency>
     </dependencies>
 
@@ -128,31 +126,33 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>nl.stokpop</groupId>
-                <artifactId>events-gatling-maven-plugin</artifactId>
+                <groupId>io.perfana</groupId>
+                <artifactId>events-jmeter-maven-plugin</artifactId>
+                <executions>
+                    <!-- Run JMeter tests -->
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                    <!-- Fail build on errors in test -->
+                    <execution>
+                        <id>jmeter-check-results</id>
+                        <goals>
+                            <goal>results</goal>
+                        </goals>
+                    </execution>
+                    <!--- needed to generate target/config.json -->
+                    <execution>
+                        <id>configuration</id>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <resultsFolder>target/gatling/results</resultsFolder>
-                    <simulationsFolder>src/test/scala</simulationsFolder>
-                    <noReports>true</noReports>
-                    <simulationClass>${systemUnderTestSimulation}</simulationClass>
-                    <jvmArgs>
-                        <jvmArg>-Dscenario=${scenario}</jvmArg>
-                        <jvmArg>-DtestRunId=${testRunId}</jvmArg>
-                        <jvmArg>-DtestEnvironment=${testEnvironment}</jvmArg>
-                        <jvmArg>-DtargetBaseUrl=${targetBaseUrl}</jvmArg>
-                        <jvmArg>-DinitialUsersPerSecond=${initialUsersPerSecond}</jvmArg>
-                        <jvmArg>-DtargetUsersPerSecond=${targetUsersPerSecond}</jvmArg>
-                        <jvmArg>-DrampupTimeInSeconds=${rampupTimeInSeconds}</jvmArg>
-                        <jvmArg>-DconstantLoadTimeInSeconds=${constantLoadTimeInSeconds}</jvmArg>
-                        <jvmArg>-Ddebug=${debug}</jvmArg>
-                        <jvmArg>-DuseProxy=${useProxy}</jvmArg>
-                        <jvmArg>-Dgatling.data.graphite.rootPathPrefix=gatling2.${systemUnderTest}.${testEnvironment}</jvmArg>
-                        <jvmArg>-Dgatling.data.graphite.host=${influxDbHost}</jvmArg>
-                        <jvmArg>-Xms1g</jvmArg>
-                        <jvmArg>-Xmx4g</jvmArg>
-                    </jvmArgs>
-                    <propagateSystemProperties>false</propagateSystemProperties>
-
+                    <errorRateThresholdInPercent>2</errorRateThresholdInPercent>
                     <eventSchedulerConfig>
                         <debugEnabled>true</debugEnabled>
                         <schedulerEnabled>${eventsEnabled}</schedulerEnabled>
@@ -162,7 +162,7 @@
                             ${eventScheduleScript}
                         </scheduleScript>
                         <eventConfigs>
-                            <eventConfig implementation="nl.stokpop.event.wiremock.WiremockEventConfig">
+                            <eventConfig implementation="io.perfana.event.wiremock.WiremockEventConfig">
                                 <enabled>${wiremockEnabled}</enabled>
                                 <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
                                 <wiremockUrl>${wiremockUrl}</wiremockUrl>
@@ -194,7 +194,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>nl.stokpop</groupId>
+                        <groupId>io.perfana</groupId>
                         <artifactId>test-events-wiremock</artifactId>
                         <version>${test-events-wiremock.version}</version>
                     </dependency>
