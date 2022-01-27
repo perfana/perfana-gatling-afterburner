@@ -99,7 +99,7 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>nl.stokpop</groupId>
+                    <groupId>io.perfana</groupId>
                     <artifactId>events-gatling-maven-plugin</artifactId>
                     <version>${events-gatling-maven-plugin.version}</version>
                 </plugin>
