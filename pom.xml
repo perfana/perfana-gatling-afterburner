@@ -61,7 +61,7 @@
 
         <!-- Default load settings -->
         <initialUsersPerSecond>1</initialUsersPerSecond>
-        <targetUsersPerSecond>1</targetUsersPerSecond>
+        <targetConcurrency>1</targetConcurrency>
         <rampupTimeInSeconds>60</rampupTimeInSeconds>
         <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
 
@@ -166,14 +166,15 @@
                     <errorRateThresholdInPercent>2</errorRateThresholdInPercent>
                     <propertiesUser>
                         <test.testRunId>${testRunId}</test.testRunId>
-                        <test.duration>${duration}</test.duration>
+                        <test.duration>${constantLoadTimeInSeconds}</test.duration>
                         <test.targetConcurrency>${targetConcurrency}</test.targetConcurrency>
-                        <test.rampUpTime>${rampUpTime}</test.rampUpTime>
+                        <test.rampUpTime>${rampupTimeInSeconds}</test.rampUpTime>
                         <test.influxdb.url>${influxDbUrl}</test.influxdb.url>
                         <test.systemUnderTest>${systemUnderTest}</test.systemUnderTest>
                         <test.testEnvironment>${testEnvironment}</test.testEnvironment>
-                        <test.server_name>${server_name}</test.server_name>
-                        <test.port>${port}</test.port>
+                        <test.protocol>${targetProtocol}</test.protocol>
+                        <test.server_name>${targetDomain}</test.server_name>
+                        <test.port>${targetPort}</test.port>
                     </propertiesUser>
                     <jmeterExtensions>
                         <artifact>kg.apc:jmeter-plugins-casutg:2.9</artifact>
@@ -315,7 +316,7 @@
             <properties>
                 <workload>stressTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>30</targetUsersPerSecond>
+                <targetConcurrency>30</targetConcurrency>
                 <rampupTimeInSeconds>1800</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
@@ -332,7 +333,7 @@
             <properties>
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>2</targetUsersPerSecond>
+                <targetConcurrency>2</targetConcurrency>
                 <rampupTimeInSeconds>30</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
@@ -354,7 +355,7 @@
                 <scenario>slowbackend</scenario>
                 <workload>slowBackendTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>2</targetUsersPerSecond>
+                <targetConcurrency>2</targetConcurrency>
                 <rampupTimeInSeconds>60</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>300</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
@@ -382,7 +383,7 @@
             <properties>
                 <workload>enduranceTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>60</targetUsersPerSecond>
+                <targetConcurrency>60</targetConcurrency>
                 <rampupTimeInSeconds>900</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>172800</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
@@ -399,7 +400,7 @@
             <properties>
                 <workload>nightlyLoadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetUsersPerSecond>40</targetUsersPerSecond>
+                <targetConcurrency>40</targetConcurrency>
                 <rampupTimeInSeconds>600</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>3600</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
