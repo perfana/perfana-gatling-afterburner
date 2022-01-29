@@ -168,7 +168,7 @@
                         <test.testRunId>${testRunId}</test.testRunId>
                         <test.duration>${constantLoadTimeInSeconds}</test.duration>
                         <test.targetConcurrency>${targetConcurrency}</test.targetConcurrency>
-                        <test.rampUpTime>${rampupTimeInSeconds}</test.rampUpTime>
+                        <test.rampUpTime>${rampUpTimeInSeconds}</test.rampUpTime>
                         <test.influxdb.url>${influxDbUrl}</test.influxdb.url>
                         <test.systemUnderTest>${systemUnderTest}</test.systemUnderTest>
                         <test.testEnvironment>${testEnvironment}</test.testEnvironment>
@@ -333,7 +333,7 @@
             <properties>
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
-                <targetConcurrency>2</targetConcurrency>
+                <targetConcurrency>10</targetConcurrency>
                 <rampupTimeInSeconds>30</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
