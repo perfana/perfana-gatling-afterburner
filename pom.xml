@@ -25,7 +25,7 @@
         <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
         <perfana-java-client.version>2.0.1</perfana-java-client.version>
         <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
-        <test-events-springboot.version>1.0.0-SNAPSHOT</test-events-springboot.version>
+        <test-events-springboot.version>1.0.0</test-events-springboot.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -367,8 +367,8 @@
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
-                <rampupTimeInSeconds>30</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>120</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
