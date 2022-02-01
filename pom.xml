@@ -26,6 +26,7 @@
         <perfana-java-client.version>2.0.1</perfana-java-client.version>
         <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
         <test-events-springboot.version>1.0.0</test-events-springboot.version>
+        <test-events-command-runner.version>1.0.1</test-events-command-runner.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -246,6 +247,10 @@
                                 <actuatorBaseUrl>http://optimus-prime-be:8080/actuator</actuatorBaseUrl>
                                 <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size</actuatorEnvProperties>
                             </eventConfig>
+                            <eventConfig implementation="io.perfana.events.commandrunner.CommandRunnerEventConfig">
+                                <name>CommandRunnerGatlingPush</name>
+                                <command>sh "./g2i ./results -a http://influxdb:8086 -b gatling3 -t acc -y OptimusPrime -d | awk '{print \$2}'"</command>
+                            </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
                 </configuration>
@@ -264,6 +269,11 @@
                         <groupId>io.perfana</groupId>
                         <artifactId>test-events-springboot</artifactId>
                         <version>${test-events-springboot.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>test-events-command-runner</artifactId>
+                        <version>${test-events-command-runner.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
