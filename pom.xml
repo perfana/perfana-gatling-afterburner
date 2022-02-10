@@ -385,7 +385,7 @@
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test,micro-service</tags>
+                <tags>load-test,bff</tags>
             </properties>
         </profile>
 
