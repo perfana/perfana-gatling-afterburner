@@ -220,7 +220,7 @@
                                 <apiKey>${apiKey}</apiKey>
                                 <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
                                 <variables>
-                                    <perfana-containers>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</perfana-containers>
+                                    <perfana-containers>.*mariadb.*|.*mega-tron-fe.*</perfana-containers>
                                 </variables>
                                 <testConfig>
                                     <systemUnderTest>${systemUnderTest}</systemUnderTest>
