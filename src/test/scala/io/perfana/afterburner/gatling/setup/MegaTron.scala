@@ -7,7 +7,7 @@ import scala.concurrent.duration._
 
 /**
  * This Simulation class is responsible for configuring the Scenarios to run, keeping the active
- * profile and configuration in mind. A lot of what happens here depends on the configuration in 
+ * profile and configuration in mind. A lot of what happens here depends on the configuration in
  * the application.conf file. When changes have to be made to which scenarios to run, that
  * information is gathered in the Scenarios object.
  */

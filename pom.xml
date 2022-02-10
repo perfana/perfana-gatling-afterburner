@@ -2,27 +2,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
-
     <groupId>io.perfana</groupId>
     <artifactId>gatling-afterburner</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
 
     <properties>
 
         <encoding>UTF-8</encoding>
 
         <!-- dependency versioning -->
-        <gatling.version>3.3.1</gatling.version>
-        <events-gatling-maven-plugin.version>3.1.0-events-2.1</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>1.6.0</perfana-java-client.version>
-        <test-events-wiremock.version>1.2.0</test-events-wiremock.version>
+        <gatling.version>3.7.3</gatling.version>
+        <events-gatling-maven-plugin.version>4.1.0-events-2</events-gatling-maven-plugin.version>
+        <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
+        <perfana-java-client.version>2.0.2-SNAPSHOT</perfana-java-client.version>
+        <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
+        <test-events-springboot.version>1.0.0</test-events-springboot.version>
+        <test-events-command-runner.version>1.0.1</test-events-command-runner.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
 
         <!-- Default Simulation class  -->
-        <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.MegaTron</systemUnderTestSimulation>
+        <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.OptimusPrime</systemUnderTestSimulation>
 
         <!-- By default Jenkins build Url is used -->
         <CIBuildResultsUrl>${BUILD_URL}</CIBuildResultsUrl>
@@ -59,7 +69,7 @@
         <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
 
         <!-- Settings for the Perfana Dashboard -->
-        <systemUnderTest>MegaTron</systemUnderTest>
+        <systemUnderTest>Afterburner</systemUnderTest>
         <version>1.0</version>
         <tags></tags>
         <apiKey></apiKey>
@@ -87,7 +97,22 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>2.6.2</version>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>io.perfana</groupId>
+            <artifactId>gatling-elasticsearch-logs</artifactId>
+            <version>0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-core</artifactId>
+            <version>1.12.131</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.12.1</version>
         </dependency>
     </dependencies>
 
@@ -99,11 +124,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>nl.stokpop</groupId>
-                    <artifactId>events-gatling-maven-plugin</artifactId>
-                    <version>${events-gatling-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -128,8 +148,34 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>nl.stokpop</groupId>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${scala-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <jvmArgs>
+                                <jvmArg>-Xss100M</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <arg>-target:jvm-1.8</arg>
+                                <arg>-deprecation</arg>
+                                <arg>-feature</arg>
+                                <arg>-unchecked</arg>
+                                <arg>-language:implicitConversions</arg>
+                                <arg>-language:postfixOps</arg>
+                            </args>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.perfana</groupId>
                 <artifactId>events-gatling-maven-plugin</artifactId>
+                <version>${events-gatling-maven-plugin.version}</version>
                 <configuration>
                     <resultsFolder>target/gatling/results</resultsFolder>
                     <simulationsFolder>src/test/scala</simulationsFolder>
@@ -162,7 +208,7 @@
                             ${eventScheduleScript}
                         </scheduleScript>
                         <eventConfigs>
-                            <eventConfig implementation="nl.stokpop.event.wiremock.WiremockEventConfig">
+                            <eventConfig implementation="io.perfana.event.wiremock.WiremockEventConfig">
                                 <enabled>${wiremockEnabled}</enabled>
                                 <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
                                 <wiremockUrl>${wiremockUrl}</wiremockUrl>
@@ -189,12 +235,28 @@
                                     <tags>${tags}</tags>
                                 </testConfig>
                             </eventConfig>
+                            <eventConfig implementation="io.perfana.events.springboot.event.SpringBootEventConfig">
+                                <name>ActuatorEventFrontend</name>
+                                <actuatorPropPrefix>optimus-prime-fe</actuatorPropPrefix>
+                                <actuatorBaseUrl>http://optimus-prime-fe:8080/actuator</actuatorBaseUrl>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size,featureToggleIdentityMatrix</actuatorEnvProperties>
+                            </eventConfig>
+                            <eventConfig implementation="io.perfana.events.springboot.event.SpringBootEventConfig">
+                                <name>ActuatorEventBackend</name>
+                                <actuatorPropPrefix>optimus-prime-be</actuatorPropPrefix>
+                                <actuatorBaseUrl>http://optimus-prime-be:8080/actuator</actuatorBaseUrl>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size</actuatorEnvProperties>
+                            </eventConfig>
+                            <eventConfig implementation="io.perfana.events.commandrunner.CommandRunnerEventConfig">
+                                <name>CommandRunnerGatlingPush</name>
+                                <command>sh -c "./g2i ./results -a http://influxdb:8086 -b gatling3 -t acc -y OptimusPrime -d | awk '{print \$2}'"</command>
+                            </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>nl.stokpop</groupId>
+                        <groupId>io.perfana</groupId>
                         <artifactId>test-events-wiremock</artifactId>
                         <version>${test-events-wiremock.version}</version>
                     </dependency>
@@ -202,6 +264,16 @@
                         <groupId>io.perfana</groupId>
                         <artifactId>perfana-java-client</artifactId>
                         <version>${perfana-java-client.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>test-events-springboot</artifactId>
+                        <version>${test-events-springboot.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>test-events-command-runner</artifactId>
+                        <version>${test-events-command-runner.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -292,7 +364,7 @@
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
-                <tags>stress-test,micro-service</tags>
+                <tags>stress-test</tags>
             </properties>
         </profile>
 
@@ -305,14 +377,33 @@
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
-                <rampupTimeInSeconds>30</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>120</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
+                <tags>load-test,micro-service</tags>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test-type-cpu</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <scenario>cpu</scenario>
+                <workload>loadTestCpu</workload>
+                <initialUsersPerSecond>1</initialUsersPerSecond>
+                <targetUsersPerSecond>10</targetUsersPerSecond>
+                <rampupTimeInSeconds>30</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
+                <perfanaEnabled>true</perfanaEnabled>
+                <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
+                <eventsEnabled>true</eventsEnabled>
                 <tags>load-test,micro-service</tags>
             </properties>
         </profile>
