@@ -190,6 +190,7 @@
                         <jvmArg>-DtargetUsersPerSecond=${targetUsersPerSecond}</jvmArg>
                         <jvmArg>-DrampupTimeInSeconds=${rampupTimeInSeconds}</jvmArg>
                         <jvmArg>-DconstantLoadTimeInSeconds=${constantLoadTimeInSeconds}</jvmArg>
+                        <jvmArg>-DelasticPassword=${elasticPassword}</jvmArg>
                         <jvmArg>-Ddebug=${debug}</jvmArg>
                         <jvmArg>-DuseProxy=${useProxy}</jvmArg>
                         <jvmArg>-Dgatling.data.graphite.rootPathPrefix=gatling2.${systemUnderTest}.${testEnvironment}</jvmArg>
