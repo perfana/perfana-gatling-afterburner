@@ -190,6 +190,7 @@
                         <jvmArg>-DtargetUsersPerSecond=${targetUsersPerSecond}</jvmArg>
                         <jvmArg>-DrampupTimeInSeconds=${rampupTimeInSeconds}</jvmArg>
                         <jvmArg>-DconstantLoadTimeInSeconds=${constantLoadTimeInSeconds}</jvmArg>
+                        <jvmArg>-DelasticPassword=${elasticPassword}</jvmArg>
                         <jvmArg>-Ddebug=${debug}</jvmArg>
                         <jvmArg>-DuseProxy=${useProxy}</jvmArg>
                         <jvmArg>-Dgatling.data.graphite.rootPathPrefix=gatling2.${systemUnderTest}.${testEnvironment}</jvmArg>
@@ -221,6 +222,7 @@
                                 <assertResultsEnabled>${assertResultsEnabled}</assertResultsEnabled>
                                 <variables>
                                     <perfana-containers>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</perfana-containers>
+                                    <perfana-requests>database_call|flaky_call|remote_call_async</perfana-requests>
                                 </variables>
                                 <testConfig>
                                     <systemUnderTest>${systemUnderTest}</systemUnderTest>
