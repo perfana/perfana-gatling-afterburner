@@ -62,8 +62,9 @@
         <!-- Default load settings -->
         <initialUsersPerSecond>1</initialUsersPerSecond>
         <targetConcurrency>1</targetConcurrency>
-        <rampupTimeInSeconds>60</rampupTimeInSeconds>
-        <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
+        <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
+        <rampupTimeInSeconds>1</rampupTimeInSeconds>
+        <constantLoadTimeInSeconds>15</constantLoadTimeInSeconds>
 
         <!-- Settings for the Perfana Dashboard -->
         <systemUnderTest>StarScream</systemUnderTest>
@@ -168,7 +169,7 @@
                         <test.testRunId>${testRunId}</test.testRunId>
                         <test.duration>${constantLoadTimeInSeconds}</test.duration>
                         <test.targetConcurrency>${targetConcurrency}</test.targetConcurrency>
-                        <test.rampUpTime>${rampUpTimeInSeconds}</test.rampUpTime>
+                        <test.rampUpTime>${rampupTimeInSeconds}</test.rampUpTime>
                         <test.influxdb.url>${influxDbUrl}</test.influxdb.url>
                         <test.systemUnderTest>${systemUnderTest}</test.systemUnderTest>
                         <test.testEnvironment>${testEnvironment}</test.testEnvironment>
