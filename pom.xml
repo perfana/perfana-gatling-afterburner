@@ -317,7 +317,8 @@
                 <workload>stressTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>30</targetConcurrency>
-                <rampupTimeInSeconds>1800</rampupTimeInSeconds>
+                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
+                <rampupTimeInSeconds>30</rampupTimeInSeconds>
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
@@ -334,8 +335,9 @@
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>10</targetConcurrency>
-                <rampupTimeInSeconds>30</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
+                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
+                <rampupTimeInSeconds>1</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>4</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
@@ -356,8 +358,9 @@
                 <workload>slowBackendTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>2</targetConcurrency>
-                <rampupTimeInSeconds>60</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>300</constantLoadTimeInSeconds>
+                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
+                <rampupTimeInSeconds>1</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>5</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <wiremockEnabled>true</wiremockEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
@@ -384,8 +387,9 @@
                 <workload>enduranceTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>60</targetConcurrency>
-                <rampupTimeInSeconds>900</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>172800</constantLoadTimeInSeconds>
+                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
+                <rampupTimeInSeconds>15</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>2880</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
@@ -401,8 +405,9 @@
                 <workload>nightlyLoadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>40</targetConcurrency>
-                <rampupTimeInSeconds>600</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>3600</constantLoadTimeInSeconds>
+                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
+                <rampupTimeInSeconds>10</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>60</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <assertResultsEnabled>true</assertResultsEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
