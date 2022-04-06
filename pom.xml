@@ -62,9 +62,10 @@
         <!-- Default load settings -->
         <initialUsersPerSecond>1</initialUsersPerSecond>
         <targetConcurrency>1</targetConcurrency>
-        <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
-        <rampupTimeInSeconds>1</rampupTimeInSeconds>
-        <constantLoadTimeInSeconds>15</constantLoadTimeInSeconds>
+        <!-- these are turned into minutes in jmeter script for bmz-Concurrent Thread Group plugin! -->
+        <!-- via: ${__groovy(vars.get("test.rampUp") == null ? 3 : Integer.valueOf(vars.get("test.rampUp")) / 60)} -->
+        <rampupTimeInSeconds>60</rampupTimeInSeconds>
+        <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
 
         <!-- Settings for the Perfana Dashboard -->
         <systemUnderTest>StarScream</systemUnderTest>
@@ -336,9 +337,8 @@
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>10</targetConcurrency>
-                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
-                <rampupTimeInSeconds>1</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>4</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>60</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>240</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
@@ -359,9 +359,8 @@
                 <workload>slowBackendTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>2</targetConcurrency>
-                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
-                <rampupTimeInSeconds>1</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>5</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>60</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>300</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <wiremockEnabled>true</wiremockEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
@@ -388,9 +387,8 @@
                 <workload>enduranceTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>60</targetConcurrency>
-                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
-                <rampupTimeInSeconds>15</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>2880</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>900</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>172800</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
                 <graphitePrefix>gatling2</graphitePrefix>
@@ -406,9 +404,8 @@
                 <workload>nightlyLoadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetConcurrency>40</targetConcurrency>
-                <!-- these actually are minutes when injected into jmeter bmz-Concurrent Thread Group plugin! -->
-                <rampupTimeInSeconds>10</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>60</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>600</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>3600</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <assertResultsEnabled>true</assertResultsEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
