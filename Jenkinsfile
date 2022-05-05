@@ -14,8 +14,8 @@ pipeline {
         string(name: 'targetBaseUrl', defaultValue: 'http://optimus-prime-fe:8080', description: 'Target Url')
         string(name: 'apiKey', defaultValue: '', description: 'Perfana API key, will override secret if provided')
         string(name: 'influxUrl', defaultValue: 'http://influxdb:8086', description: 'InfluxDb URL')
-        string(name: 'influxUser', defaultValue: '', description: 'InfluxDb User')      
-        string(name: 'influxPassword', defaultValue: '', description: 'InfluxDb Password')      
+        string(name: 'influxUser', defaultValue: '', description: 'InfluxDb User')
+        string(name: 'influxPassword', defaultValue: '', description: 'InfluxDb Password')
         booleanParam(name: 'kubernetes', defaultValue: false, description: 'Run in Kubernetes')
 
     }
@@ -56,17 +56,17 @@ pipeline {
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN'), string(credentialsId: 'elasticPassword', variable: 'ESPWD'), string(credentialsId: 'employeeDbPassword', variable: 'EDPWD')]) {
 
                        if(params.apiKey != "") {
-                          
+
                           sh """
                               ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DemployeeDbPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="${params.influxUser}" -DinfluxPassword="${params.influxPassword}"  -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
-                          
-                       } else {    
-                        
+
+                       } else {
+
                            sh """
                               ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DemployeeDbPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl}  "-DinfluxUser=${params.influxUser}" "-DinfluxPassword=${params.influxPassword}" -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
-                       }   
+                       }
                     }
                 }
             }
