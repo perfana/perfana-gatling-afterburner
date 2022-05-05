@@ -6,6 +6,7 @@ pipeline {
    agent any
 
     parameters {
+        string(name: 'perfana_url', defaultValue: 'http://perfana:3000', description: 'Name used as System Under Test in Perfana')
         string(name: 'system_under_test', defaultValue: 'OptimusPrime', description: 'Name used as System Under Test in Perfana')
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend', 'test-type-cpu'], description: 'Workload profile to use in your Gatling script')
@@ -51,7 +52,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN'), string(credentialsId: 'elasticPassword', variable: 'ESPWD')]) {
 
                         sh """
-                           ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
+                           ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DperfanaUrl=${params.perfana_url} ${kubernetes}
                         """
                     }
                 }
