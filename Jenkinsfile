@@ -53,20 +53,20 @@ pipeline {
 
                     def mvnHome = tool 'M3'
 
-                    withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN'), string(credentialsId: 'elasticPassword', variable: 'ESPWD'), string(credentialsId: 'employeeDbPassword', variable: 'EDPWD')]) {
+                    withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN'), string(credentialsId: 'elasticPassword', variable: 'ESPWD')]) {
 
                        if(params.apiKey != "") {
-
+                          
                           sh """
-                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DemployeeDbPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="${params.influxUser}" -DinfluxPassword="${params.influxPassword}"  -DperfanaUrl=${params.perfana_url} ${kubernetes}
+                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
-
-                       } else {
-
+                          
+                       } else {    
+                        
                            sh """
-                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DemployeeDbPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl}  "-DinfluxUser=${params.influxUser}" "-DinfluxPassword=${params.influxPassword}" -DperfanaUrl=${params.perfana_url} ${kubernetes}
+                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
-                       }
+                       }   
                     }
                 }
             }
