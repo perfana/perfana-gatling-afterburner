@@ -11,11 +11,12 @@ pipeline {
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend', 'test-type-cpu'], description: 'Workload profile to use in your Gatling script')
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
-        string(name: 'targetBaseUrl', defaultValue: 'http://optimus-prime-fe:8080', description: 'Target Url')
+        string(name: 'targetBaseUrl', defaultValue: 'http://optimus-prime-fe-afterburner:8080', description: 'Target Url')
         string(name: 'apiKey', defaultValue: '', description: 'Perfana API key, will override secret if provided')
         string(name: 'influxUrl', defaultValue: 'http://influxdb:8086', description: 'InfluxDb URL')
         string(name: 'influxUser', defaultValue: '', description: 'InfluxDb User')
         string(name: 'influxPassword', defaultValue: '', description: 'InfluxDb Password')
+        string(name: 'employeeDbPassword', defaultValue: '', description: 'Employee db Password')
         booleanParam(name: 'kubernetes', defaultValue: false, description: 'Run in Kubernetes')
 
     }
@@ -58,13 +59,13 @@ pipeline {
                        if(params.apiKey != "") {
                           
                           sh """
-                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="${params.influxUser}" -DinfluxPassword="${params.influxPassword}"  -DperfanaUrl=${params.perfana_url} ${kubernetes}
+                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="${params.influxUser}" -DinfluxPassword="${params.influxPassword}" -DemployeeDbPassword=${employeeDbPassword} -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
                           
                        } else {    
                         
                            sh """
-                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl}  "-DinfluxUser=${params.influxUser}" "-DinfluxPassword=${params.influxPassword}" -DperfanaUrl=${params.perfana_url} ${kubernetes}
+                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl}  "-DinfluxUser=${params.influxUser}" "-DinfluxPassword=${params.influxPassword}" -DemployeeDbPassword=${employeeDbPassword} -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
                        }   
                     }
