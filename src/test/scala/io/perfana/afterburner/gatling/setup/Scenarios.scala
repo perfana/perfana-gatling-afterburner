@@ -18,7 +18,7 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
-    .feed(DatabaseFeeder.mariaDb)
+//    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
 //     .exec(SimpleCpuBurn.call)
 //     .pause(3)
@@ -30,13 +30,13 @@ object Scenarios {
 //    .pause(3)
 //    .exec(RemoteDelay.call)
 //    .pause(3)
-    .exec(CallMany.call)
+ //   .exec(CallMany.call)
     .pause(3)
     .exec(Database.call)
     .exec(FlakyCall.call)
 
   val slowBackendTestScenario = scenario("Slow backend test")
-    .feed(DatabaseFeeder.mariaDb)
+//    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
     .exec(RemoteDelay.call)
     .pause(3)
@@ -46,7 +46,7 @@ object Scenarios {
     .exec(FlakyCall.call)
 
   val cpuTestScenario = scenario("CPU test")
-    .feed(DatabaseFeeder.mariaDb)
+//    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
     .exec(SimpleCpuBurnPlus.call)
     .pause(3)
