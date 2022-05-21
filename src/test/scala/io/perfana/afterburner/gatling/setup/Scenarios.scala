@@ -30,9 +30,9 @@ object Scenarios {
 //    .pause(3)
 //    .exec(RemoteDelay.call)
 //    .pause(3)
- //   .exec(CallMany.call)
+    .exec(CallMany.call)
     .pause(3)
-    .exec(Database.call)
+ //   .exec(Database.call)
     .exec(FlakyCall.call)
 
   val slowBackendTestScenario = scenario("Slow backend test")
@@ -42,7 +42,7 @@ object Scenarios {
     .pause(3)
     .exec(CallMany.call)
     .pause(3)
-    .exec(Database.call)
+  //  .exec(Database.call)
     .exec(FlakyCall.call)
 
   val cpuTestScenario = scenario("CPU test")
@@ -54,7 +54,7 @@ object Scenarios {
     .pause(3)
     .exec(CallMany.call)
     .pause(3)
-    .exec(Database.call)
+//    .exec(Database.call)
 
   /**
    * These are the scenarios run in 'debug' mode.
