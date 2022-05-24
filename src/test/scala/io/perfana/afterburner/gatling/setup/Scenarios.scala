@@ -18,11 +18,11 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
-//    .feed(DatabaseFeeder.mariaDb)
+.feed(CSVFeeder.firstName)
     .exec(session => session.set("testRunId", Configuration.testRunId))
-//     .exec(SimpleCpuBurn.call)
-//     .pause(3)
-//    .exec(SimpleDelay.call)
+     .exec(SimpleCpuBurn.call)
+     .pause(3)
+      .exec(SimpleDelay.call)
 //    .pause(3)
 //    .exec(SimpleMiniLeak.call)
 //    .pause(3)
@@ -30,13 +30,13 @@ object Scenarios {
 //    .pause(3)
 //    .exec(RemoteDelay.call)
 //    .pause(3)
-    .exec(CallMany.call)
+   // .exec(CallMany.call)
     .pause(3)
- //   .exec(Database.call)
+    .exec(Database.call)
     .exec(FlakyCall.call)
 
   val slowBackendTestScenario = scenario("Slow backend test")
-//    .feed(DatabaseFeeder.mariaDb)
+.feed(CSVFeeder.firstName)
     .exec(session => session.set("testRunId", Configuration.testRunId))
     .exec(RemoteDelay.call)
     .pause(3)
@@ -46,7 +46,7 @@ object Scenarios {
     .exec(FlakyCall.call)
 
   val cpuTestScenario = scenario("CPU test")
-//    .feed(DatabaseFeeder.mariaDb)
+.feed(CSVFeeder.firstName)
     .exec(session => session.set("testRunId", Configuration.testRunId))
     .exec(SimpleCpuBurnPlus.call)
     .pause(3)
@@ -65,7 +65,7 @@ object Scenarios {
       exec(FlakyCall.call)
     }
 //
-//    .feed(DatabaseFeeder.mariaDb)
+.feed(CSVFeeder.firstName)
 //    .exitBlockOnFail(
 //      pause(3)
 //        .exec(Database.call)
