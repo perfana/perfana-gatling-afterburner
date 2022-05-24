@@ -12,6 +12,6 @@ import io.gatling.jdbc.Predef._
  */
 object CSVFeeder {
 
-  val firstNames = csv("firstNames.csv").random
+  val firstName = csv("firstNames.csv").random
 
 }
