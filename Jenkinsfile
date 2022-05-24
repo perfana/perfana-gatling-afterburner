@@ -54,7 +54,7 @@ pipeline {
 
                     def mvnHome = tool 'M3'
 
-                    withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN'), string(credentialsId: 'elasticPassword', variable: 'ESPWD')]) {
+                    withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
                        if(params.apiKey != "") {
                           
