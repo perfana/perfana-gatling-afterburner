@@ -10,7 +10,7 @@ import io.gatling.jdbc.Predef._
 /**
  * Created by x077411 on 12/12/2014.
  */
-object SomeDataFeeder {
+object CSVFeeder {
 
   val firstNames = csv("firstNames.csv").random
 
