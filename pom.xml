@@ -344,7 +344,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <testEnvironment>acc</testEnvironment>
+                <testEnvironment>acme</testEnvironment>
             </properties>
         </profile>
 
