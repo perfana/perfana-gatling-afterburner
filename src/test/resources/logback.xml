@@ -7,7 +7,7 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<url>http://elastic:${elasticPassword}@elasticsearch-master:9200/_bulk</url>
+		<url>http://elastic:${elasticPassword}@elasticsearch-master.logging:9200/_bulk</url>
 		<authentication class="com.internetitem.logback.elasticsearch.config.BasicAuthentication" />
 		<index>gatling-%date{yyyy.MM.dd}</index>
 		<type>gatling</type>
