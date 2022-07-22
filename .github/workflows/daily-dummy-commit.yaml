@@ -1,0 +1,33 @@
+---
+# This is a basic workflow that is manually triggered
+
+name: Build perfana-fe release image
+
+
+on:
+  workflow_dispatch:
+    inputs:
+  schedule:
+    - cron: '57 7 * * *'
+jobs:
+  daily_dummy_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code from code branch
+        uses: actions/checkout@v2
+        with:
+          path: main
+          fetch-depth: 0
+          ref: OptimusPrime
+      - name: Replace image release
+        working-directory: main
+      run: |
+        date="date: $(date +'%Y-%m-%dT%H:%M:%S')"
+        sed -i "s|.*|$date|g" dummy-commit.txt
+      - name: Commit file
+        working-directory: main
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Dummy commit for demo purposes" -a
+          git push
