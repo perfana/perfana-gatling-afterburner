@@ -1,7 +1,7 @@
 ---
 # This is a basic workflow that is manually triggered
 
-name: Build perfana-fe release image
+name: Do daily dummy commit
 
 
 on:
