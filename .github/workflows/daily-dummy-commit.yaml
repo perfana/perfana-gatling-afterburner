@@ -21,9 +21,9 @@ jobs:
           ref: OptimusPrime
       - name: Replace image release
         working-directory: main
-      run: |
-        date="date: $(date +'%Y-%m-%dT%H:%M:%S')"
-        sed -i "s|.*|$date|g" dummy-commit.txt
+        run: |
+          date="date: $(date +'%Y-%m-%dT%H:%M:%S')"
+          sed -i "s|.*|$date|g" dummy-commit.txt
       - name: Commit file
         working-directory: main
         run: |
