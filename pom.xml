@@ -23,10 +23,11 @@
         <gatling.version>3.7.3</gatling.version>
         <events-gatling-maven-plugin.version>4.1.0-events-2</events-gatling-maven-plugin.version>
         <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
-        <perfana-java-client.version>2.0.4</perfana-java-client.version>
+        <perfana-java-client.version>2.0.5-SNAPSHOT</perfana-java-client.version>
         <test-events-wiremock.version>[2.0.0,2.1.0)</test-events-wiremock.version>
-        <test-events-springboot.version>[1.0.0,1.1.0)</test-events-springboot.version>
+        <test-events-springboot.version>1.0.1-SNAPSHOT</test-events-springboot.version>
         <test-events-command-runner.version>[1.0.1,1.1.0)</test-events-command-runner.version>
+        <test-events-test-run-config-command.version>1.0.0-SNAPSHOT</test-events-test-run-config-command.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -264,6 +265,37 @@
                                 <name>CommandRunnerGatlingPush</name>
                                 <command>sh -c "g2i ./results -a ${influxUrl} -u ${influxUser} -p ${influxPassword} -b gatling3 -t acme -y OptimusPrime -d | awk '{print $2}'"</command>
                             </eventConfig>
+                            <eventConfig implementation="io.perfana.events.testrunconfigcommand.event.TestRunConfigCommandEventConfig">
+                                <name>GitGetHash</name>
+                                <command>git rev-parse --verify HEAD</command>
+                                <output>key</output>
+                                <key>https://github.com/perfana/perfana-gatling-afterburner</key>
+                                <tags>GitHub</tags>
+                            </eventConfig>
+                            <eventConfig implementation="io.perfana.events.testrunconfigcommand.event.TestRunConfigCommandEventConfig">
+                                <name>KubernetesGetDeploymentFE</name>
+                                <command>kubectl get deployment optimus-prime-fe-afterburner -n acme -ojson</command>
+                                <include>env,resources,image,replicas,strategy,kubernetes</include>
+                                <exclude>status</exclude>
+                                <output>json</output>
+                                <tags>kubernetes,optimus-prime-fe</tags>
+                            </eventConfig>
+                            <eventConfig implementation="io.perfana.events.testrunconfigcommand.event.TestRunConfigCommandEventConfig">
+                                <name>KubernetesGetDeploymentBE</name>
+                                <command>kubectl get deployment optimus-prime-be-afterburner -n acme -ojson</command>
+                                <include>env,resources,image,replicas,strategy,kubernetes</include>
+                                <exclude>status</exclude>
+                                <output>json</output>
+                                <tags>kubernetes,optimus-prime-be</tags>
+                            </eventConfig>
+                            <eventConfig implementation="io.perfana.events.testrunconfigcommand.event.TestRunConfigCommandEventConfig">
+                                <name>KubernetesGetDeploymentMySql</name>
+                                <command>kubectl get statefulset afterburner-db-mysql -ojson</command>
+                                <include>env,resources,image,replicas,strategy,kubernetes</include>
+                                <exclude>status,password,secret</exclude>
+                                <output>json</output>
+                                <tags>kubernetes,afterburner-db-mysql</tags>
+                            </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
                 </configuration>
@@ -287,6 +319,11 @@
                         <groupId>io.perfana</groupId>
                         <artifactId>test-events-command-runner</artifactId>
                         <version>${test-events-command-runner.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>test-events-test-run-config-command</artifactId>
+                        <version>${test-events-test-run-config-command.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
