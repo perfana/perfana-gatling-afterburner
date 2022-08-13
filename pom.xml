@@ -285,16 +285,16 @@
                                 <name>KubernetesGetDeploymentFE</name>
                                 <command>kubectl get deployment optimus-prime-fe-afterburner -n acme -ojson</command>
                                 <includes>env,resources,image,replicas,strategy,kubernetes</includes>
-                                <excludes>status</excludes>
-                                <output>json</output>
+                                <excludes>status,password,TOKEN</excludes>
+                                <output>keys</output>
                                 <tags>kubernetes,optimus-prime-fe</tags>
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.testrunconfigcommand.TestRunConfigCommandEventConfig">
                                 <name>KubernetesGetDeploymentBE</name>
                                 <command>kubectl get deployment optimus-prime-be-afterburner -n acme -ojson</command>
                                 <includes>env,resources,image,replicas,strategy,kubernetes</includes>
-                                <excludes>status</excludes>
-                                <output>json</output>
+                                <excludes>status,password,TOKEN</excludes>
+                                <output>keys</output>
                                 <tags>kubernetes,optimus-prime-be</tags>
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.testrunconfigcommand.TestRunConfigCommandEventConfig">
@@ -302,7 +302,7 @@
                                 <command>kubectl get statefulset afterburner-db-mysql -ojson</command>
                                 <includes>env,resources,image,replicas,strategy,kubernetes</includes>
                                 <excludes>status,password,secret</excludes>
-                                <output>json</output>
+                                <output>keys</output>
                                 <tags>kubernetes,afterburner-db-mysql</tags>
                             </eventConfig>
                         </eventConfigs>
