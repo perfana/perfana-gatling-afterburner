@@ -263,6 +263,16 @@
                         <artifactId>perfana-java-client</artifactId>
                         <version>${perfana-java-client.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>test-events-springboot</artifactId>
+                        <version>${test-events-springboot.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.perfana</groupId>
+                        <artifactId>test-events-test-run-config-command</artifactId>
+                        <version>${test-events-test-run-config-command.version}</version>
+                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>
