@@ -159,6 +159,8 @@
                         <test.targetConcurrency>${targetConcurrency}</test.targetConcurrency>
                         <test.rampUpTime>${rampupTimeInSeconds}</test.rampUpTime>
                         <test.influxdb.url>${influxDbUrl}</test.influxdb.url>
+                        <test.influxdb.user>${influxDbUser}</test.influxdb.user>
+                        <test.influxdb.password>${influxDbPassword}</test.influxdb.password>
                         <test.systemUnderTest>${systemUnderTest}</test.systemUnderTest>
                         <test.testEnvironment>${testEnvironment}</test.testEnvironment>
                         <test.protocol>${targetProtocol}</test.protocol>
