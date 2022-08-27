@@ -52,7 +52,7 @@ pipeline {
 
 
                     sh """
-                       ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=${perfanaApiKey} -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
+                       ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -Dsut-config=star-scream -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=${perfanaApiKey} -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
                     """
 
                 }
