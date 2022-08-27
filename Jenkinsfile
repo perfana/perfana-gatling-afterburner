@@ -10,7 +10,7 @@ pipeline {
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend'], description: 'Workload profile to use in your Gatling script')
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
-        string(name: 'targetDomain', defaultValue: 'star-scream-fe', description: 'Target domain')
+        string(name: 'targetDomain', defaultValue: 'star-scream-fe-afterburner', description: 'Target domain')
         string(name: 'targetPort', defaultValue: '8080', description: 'Target port')
         string(name: 'targetProtocol', defaultValue: 'http', description: 'Target protocol')
         booleanParam(name: 'kubernetes', defaultValue: false, description: 'Run in Kubernetes')
