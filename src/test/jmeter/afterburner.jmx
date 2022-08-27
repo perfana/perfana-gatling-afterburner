@@ -105,6 +105,10 @@
             <stringProp name="Header.name">Content-Type</stringProp>
             <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
           </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">perfana-test-run-id</stringProp>
+            <stringProp name="Header.value">${TEST_RUN_ID}</stringProp>
+          </elementProp>
         </collectionProp>
       </HeaderManager>
       <hashTree/>

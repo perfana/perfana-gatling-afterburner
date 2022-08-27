@@ -333,7 +333,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <testEnvironment>acme</testEnvironment>
+                <testEnvironment>acc</testEnvironment>
             </properties>
         </profile>
 
