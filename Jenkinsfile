@@ -43,19 +43,17 @@ pipeline {
                     def version = "2.0." + env.BUILD_NUMBER
                     def buildUrl = env.BUILD_URL
                     def kubernetes = (params.kubernetes == true) ? "-Pkubernetes" : ""
-
+                    def perfanaApiKey = env.PERFANA_API_KEY
 
                     // ** NOTE: This 'M3' maven tool must be configured
                     // **       in the global configuration.
 
                     def mvnHome = tool 'M3'
 
-                    withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
-                        sh """
-                           ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=$TOKEN -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
-                        """
-                    }
+                    sh """
+                       ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=${perfanaApiKey} -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
+                    """
 
                 }
             }
