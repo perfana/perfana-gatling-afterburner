@@ -26,7 +26,7 @@
         <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
 
         <!-- Perfana url  -->
-        <perfanaUrl>http://perfana-fe:3000</perfanaUrl>
+        <perfanaUrl>http://perfana-fe</perfanaUrl>
 
         <!-- Default Simulation class  -->
         <systemUnderTestSimulation>io.perfana.afterburner.gatling.setup.StarScream</systemUnderTestSimulation>
