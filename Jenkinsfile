@@ -50,11 +50,12 @@ pipeline {
 
                     def mvnHome = tool 'M3'
 
+                    withKubeConfig(caCertificate: 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkakNDQVIyZ0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQWpNU0V3SHdZRFZRUUREQmhyTTNNdGMyVnkKZG1WeUxXTmhRREUyTlRZMk1qTTBOekF3SGhjTk1qSXdOak13TWpFeE1URXdXaGNOTXpJd05qSTNNakV4TVRFdwpXakFqTVNFd0h3WURWUVFEREJock0zTXRjMlZ5ZG1WeUxXTmhRREUyTlRZMk1qTTBOekF3V1RBVEJnY3Foa2pPClBRSUJCZ2dxaGtqT1BRTUJCd05DQUFST3BqNG1CVzhwdmw0M2VrNllOOFczWitHU3lCZEUvSm9SMS8xd1Z6TkYKdHRubDBKZW5kQ0VHRGt0bjUva0pHS0ROVENob3dMSWNKOUxPV0JrK2d1ZVFvMEl3UURBT0JnTlZIUThCQWY4RQpCQU1DQXFRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVXdESmdpZGxQQmwrUElHZ2l4NWlWClFPUVlTdmd3Q2dZSUtvWkl6ajBFQXdJRFJ3QXdSQUlnQkRPVEUzekk1eUhOSENBaEZvaHVNdzFYVy93bStzVngKSUNWamZFUnEydkFDSUF2TFh4Z25HKzdsR1VJUnVFMnU3ZjFyaU5yNCt5UENLbnc1OVFkbXlXYjcKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=', clusterName: 'acme', contextName: 'acme', credentialsId: 'kubeconfig-acme', namespace: 'acme', serverUrl: 'https://167.233.11.238:6443') {
 
-                    sh """
-                       ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -Dsut-config=star-scream -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=${perfanaApiKey} -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
-                    """
-
+                        sh """
+                           ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -Dsut-config=star-scream -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=${perfanaApiKey} -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} ${kubernetes}
+                        """
+                    }
                 }
             }
         }
