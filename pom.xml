@@ -323,7 +323,7 @@
             <properties>
                 <server_name>optimus-prime-fe</server_name>
                 <port>8080</port>
-                <testEnvironment>jmeter-acc</testEnvironment>
+                <testEnvironment>acme</testEnvironment>
             </properties>
         </profile>
 
@@ -333,7 +333,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <testEnvironment>acc</testEnvironment>
+                <testEnvironment>acme</testEnvironment>
             </properties>
         </profile>
 
