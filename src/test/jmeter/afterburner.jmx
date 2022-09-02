@@ -370,12 +370,12 @@
               </elementProp>
               <elementProp name="testTitle" elementType="Argument">
                 <stringProp name="Argument.name">testTitle</stringProp>
-                <stringProp name="Argument.value">${__P(test.testEnvironment,acc)}</stringProp>
+                <stringProp name="Argument.value">${__P(test.testEnvironment,acme)}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="eventTags" elementType="Argument">
                 <stringProp name="Argument.name">eventTags</stringProp>
-                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.value">${__P(test.testEnvironment,acme)}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
