@@ -231,6 +231,7 @@
                         </scheduleScript>
                         <eventConfigs>
                             <eventConfig implementation="io.perfana.event.wiremock.WiremockEventConfig">
+                                <name>WiremockEvent</name>
                                 <enabled>${wiremockEnabled}</enabled>
                                 <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
                                 <wiremockUrl>${wiremockUrl}</wiremockUrl>
