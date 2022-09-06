@@ -30,7 +30,7 @@
         <encoding>UTF-8</encoding>
 
         <!-- dependency versioning -->
-        <events-jmeter-maven-plugin.version>3.6.1-events-1</events-jmeter-maven-plugin.version>
+        <events-jmeter-maven-plugin.version>3.6.1-events-2-SNAPSHOT</events-jmeter-maven-plugin.version>
         <perfana-java-client.version>2.0.5-SNAPSHOT</perfana-java-client.version>
         <test-events-wiremock.version>2.0.0</test-events-wiremock.version>
         <test-events-springboot.version>1.0.1-SNAPSHOT</test-events-springboot.version>
