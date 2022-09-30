@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjdk-alpine:11
+FROM adoptopenjdk/openjdk11:jre-11.0.6_10-alpine
 
 
 ARG TIME_ZONE=Europe/Amsterdam

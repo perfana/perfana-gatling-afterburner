@@ -17,4 +17,4 @@ docker run --rm  \
 -e INFLUX_DB_URL=http://bla \
 -e INFLUX_DB_USER=foo \
 -e INFLUX_DB_PASSWORD=bar \
-gatling-runner
+perfana/gatling-afterburner:1.0.0
