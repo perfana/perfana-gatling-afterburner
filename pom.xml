@@ -29,7 +29,7 @@
 
         <!-- dependency versioning -->
         <gatling.version>3.7.3</gatling.version>
-        <events-gatling-maven-plugin.version>4.1.0-events-4-SNAPSHOT</events-gatling-maven-plugin.version>
+        <events-gatling-maven-plugin.version>4.1.0-events-4</events-gatling-maven-plugin.version>
         <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
         <perfana-java-client.version>2.0.6-SNAPSHOT</perfana-java-client.version>
         <test-events-springboot.version>1.1.0</test-events-springboot.version>
@@ -266,7 +266,7 @@
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.commandrunner.CommandRunnerEventConfig">
                                 <name>CommandRunnerGatlingPush</name>
-                                <onStartTest>sh -c "./g2i ./results -a ${influxUrl} ${influxUser} ${influxPassword} -b gatling3 -t acc -y OptimusPrime -d | awk '{print $2}'"</onStartTest>
+                                <onStartTest>sh -c "./g2i ./results -a ${influxUrl} -u ${influxUser} -p ${influxPassword} -b gatling3 -t acc -y OptimusPrime -d | awk '{print $2}'"</onStartTest>
                             </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
