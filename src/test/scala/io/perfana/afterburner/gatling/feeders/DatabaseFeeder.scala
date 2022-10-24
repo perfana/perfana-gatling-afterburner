@@ -14,5 +14,5 @@ import io.gatling.jdbc.Predef._
  */
 object DatabaseFeeder {
 
-  var mariaDb = jdbcFeeder("jdbc:mariadb://mariadb:3306/employees", "root", "perfana", "SELECT DISTINCT first_name as FIRST_NAME from employees.employees;").random()
+  var mariaDb = jdbcFeeder("jdbc:mysql://afterburner-db-mysql-headless:3306/employees", "afterburner", System.getProperty("employeeDbPassword"), "SELECT DISTINCT first_name as FIRST_NAME from employees.employees;").random()
 }
