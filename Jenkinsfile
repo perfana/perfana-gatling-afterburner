@@ -58,13 +58,13 @@ pipeline {
                        if(params.apiKey != "") {
                           
                           sh """
-                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="$INFLUX_USER" -DinfluxPassword="$INFLUX_PWD"  -DperfanaUrl=${params.perfana_url} ${kubernetes}
+                              ${mvnHome}/bin/mvn clean install -X -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=${params.apiKey} -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="$INFLUX_USER" -DinfluxPassword="$INFLUX_PWD"  -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
                           
                        } else {    
                         
                            sh """
-                              ${mvnHome}/bin/mvn clean install -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="$INFLUX_USER" -DinfluxPassword="$INFLUX_PWD" -DperfanaUrl=${params.perfana_url} ${kubernetes}
+                              ${mvnHome}/bin/mvn clean install -X -U events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DelasticPassword=$ESPWD -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} -DinfluxUrl=${params.influxUrl} -DinfluxUser="$INFLUX_USER" -DinfluxPassword="$INFLUX_PWD" -DperfanaUrl=${params.perfana_url} ${kubernetes}
                            """
                        }   
                     }
