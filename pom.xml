@@ -255,13 +255,13 @@
                             <eventConfig implementation="io.perfana.events.springboot.event.SpringBootEventConfig">
                                 <name>ActuatorEventFrontend</name>
                                 <actuatorPropPrefix>optimus-prime-fe</actuatorPropPrefix>
-                                <actuatorBaseUrl>http://optimus-prime-fe:8080/actuator</actuatorBaseUrl>
+                                <actuatorBaseUrl>http://optimus-prime-fe-afterburner:8080/actuator</actuatorBaseUrl>
                                 <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size,featureToggleIdentityMatrix</actuatorEnvProperties>
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.springboot.event.SpringBootEventConfig">
                                 <name>ActuatorEventBackend</name>
                                 <actuatorPropPrefix>optimus-prime-be</actuatorPropPrefix>
-                                <actuatorBaseUrl>http://optimus-prime-be:8080/actuator</actuatorBaseUrl>
+                                <actuatorBaseUrl>http://optimus-prime-be-afterburner:8080/actuator</actuatorBaseUrl>
                                 <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size</actuatorEnvProperties>
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.commandrunner.CommandRunnerEventConfig">
