@@ -382,7 +382,7 @@
                 <constantLoadTimeInSeconds>1</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.time}</testRunId>
-                <tags>stress-test</tags>
+                <tags>stress-test,gatling,k8s,jvm</tags>
             </properties>
         </profile>
 
@@ -403,7 +403,7 @@
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test,micro-service,gatling</tags>
+                <tags>load-test,micro-service,gatling,k8s,jvm</tags>
             </properties>
         </profile>
 
@@ -422,7 +422,7 @@
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
-                <tags>load-test,micro-service,gatling</tags>
+                <tags>load-test,micro-service,gatling,k8s,jvm</tags>
             </properties>
         </profile>
 
@@ -451,7 +451,7 @@
                     PT4M|wiremock-change-delay(delay=12000)|delay=12000
                     PT5M|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test,micro-service,gatling</tags>
+                <tags>load-test,micro-service,gatling,k8s,jvm</tags>
             </properties>
         </profile>
 
