@@ -395,15 +395,15 @@
                 <workload>loadTest</workload>
                 <initialUsersPerSecond>1</initialUsersPerSecond>
                 <targetUsersPerSecond>2</targetUsersPerSecond>
-                <rampupTimeInSeconds>120</rampupTimeInSeconds>
-                <constantLoadTimeInSeconds>900</constantLoadTimeInSeconds>
+                <rampupTimeInSeconds>60</rampupTimeInSeconds>
+                <constantLoadTimeInSeconds>360</constantLoadTimeInSeconds>
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
                 <eventScheduleScript>
                     PT0S|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test,micro-service</tags>
+                <tags>load-test,micro-service,gatling</tags>
             </properties>
         </profile>
 
@@ -422,7 +422,7 @@
                 <perfanaEnabled>true</perfanaEnabled>
                 <testRunId>${systemUnderTest}-${version}-${workload}-${testEnvironment}-${build.timestamp}</testRunId>
                 <eventsEnabled>true</eventsEnabled>
-                <tags>load-test,micro-service</tags>
+                <tags>load-test,micro-service,gatling</tags>
             </properties>
         </profile>
 
@@ -451,7 +451,7 @@
                     PT4M|wiremock-change-delay(delay=12000)|delay=12000
                     PT5M|wiremock-change-delay(delay=400)|delay=400
                 </eventScheduleScript>
-                <tags>load-test,micro-service</tags>
+                <tags>load-test,micro-service,gatling</tags>
             </properties>
         </profile>
 
