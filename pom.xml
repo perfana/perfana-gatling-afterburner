@@ -340,7 +340,7 @@
             </activation>
             <properties>
                 <targetBaseUrl>http://afterburner:8080</targetBaseUrl>
-                <testEnvironment>acc</testEnvironment>
+                <testEnvironment>acme</testEnvironment>
             </properties>
         </profile>
 
@@ -350,7 +350,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <testEnvironment>acc</testEnvironment>
+                <testEnvironment>acme</testEnvironment>
             </properties>
         </profile>
 
