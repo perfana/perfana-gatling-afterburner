@@ -220,7 +220,7 @@
                         <debugEnabled>true</debugEnabled>
                         <schedulerEnabled>${eventsEnabled}</schedulerEnabled>
                         <failOnError>true</failOnError>
-                        <continueOnEventCheckFailure>true</continueOnEventCheckFailure>
+                        <continueOnEventCheckFailure>false</continueOnEventCheckFailure>
                         <scheduleScript>
                             ${eventScheduleScript}
                         </scheduleScript>
