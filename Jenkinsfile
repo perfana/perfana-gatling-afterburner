@@ -13,7 +13,7 @@ pipeline {
         string(name: 'annotations', defaultValue: '', description: 'Add annotations to the test run, these will be displayed in Perfana')
         string(name: 'targetBaseUrl', defaultValue: 'http://optimus-prime-fe-afterburner:8080', description: 'Target Url')
         string(name: 'apiKey', defaultValue: '', description: 'Perfana API key, will override secret if provided')
-        string(name: 'influxUrl', defaultValue: 'https://influxdb.demo-dta.perfana-aws.cloud', description: 'InfluxDb URL')
+        string(name: 'influxUrl', defaultValue: 'http://perfana-proxy-auth.monitoring/influxdb', description: 'InfluxDb URL')
         string(name: 'influxUser', defaultValue: '', description: 'InfluxDb User')      
         string(name: 'influxPassword', defaultValue: '', description: 'InfluxDb Password')      
         booleanParam(name: 'kubernetes', defaultValue: false, description: 'Run in Kubernetes')
