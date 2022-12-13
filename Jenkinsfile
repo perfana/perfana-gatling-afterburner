@@ -6,7 +6,7 @@ pipeline {
    agent any
 
     parameters {
-        string(name: 'perfana_url', defaultValue: 'http://perfana-auth-proxy.monitoring/api', description: 'Perfana url')
+        string(name: 'perfana_url', defaultValue: 'http://perfana-auth-proxy.monitoring/', description: 'Perfana url')
         string(name: 'system_under_test', defaultValue: 'OptimusPrime', description: 'Name used as System Under Test in Perfana')
         string(name: 'gatlingRepo', defaultValue: 'https://github.com/perfana/perfana-gatling-afterburner.git', description: 'Gatling git repository')
         choice(name: 'workload', choices: ['test-type-load', 'test-type-stress', 'test-type-slow-backend', 'test-type-cpu'], description: 'Workload profile to use in your Gatling script')
