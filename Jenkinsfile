@@ -50,12 +50,12 @@ pipeline {
 
                     def mvnHome = tool 'M3'
 
-                    withKubeConfig( clusterName: 'acme', contextName: 'acme', credentialsId: 'kubeconfig-acme', namespace: 'acme') {
+//                     withKubeConfig( clusterName: 'acme', contextName: 'acme', credentialsId: 'kubeconfig-acme', namespace: 'acme') {
 
                         sh """
                            ${mvnHome}/bin/mvn clean verify -U -Ptest-env-demo,${params.workload},assert-results -Dsut-config=star-scream -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=${perfanaApiKey} -DtargetDomain=${targetDomain} -DtargetPort=${targetPort} -DtargetProtocol=${targetProtocol} -DinfluxDbUrl=https://influxdb/write?db=jmeter -DinfluxDbUser=admin -DinfluxDbPassword=${influxDbPassword}
                         """
-                    }
+//                     }
                 }
             }
         }
