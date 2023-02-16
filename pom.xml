@@ -116,11 +116,6 @@
             <version>2.7.3</version>
         </dependency>
         <dependency>
-            <groupId>io.perfana</groupId>
-            <artifactId>gatling-elasticsearch-logs</artifactId>
-            <version>0.9</version>
-        </dependency>
-        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-core</artifactId>
             <version>1.12.131</version>
@@ -206,7 +201,6 @@
                         <jvmArg>-DtargetUsersPerSecond=${targetUsersPerSecond}</jvmArg>
                         <jvmArg>-DrampupTimeInSeconds=${rampupTimeInSeconds}</jvmArg>
                         <jvmArg>-DconstantLoadTimeInSeconds=${constantLoadTimeInSeconds}</jvmArg>
-                        <jvmArg>-DelasticPassword=${elasticPassword}</jvmArg>
                         <jvmArg>-DemployeeDbPassword=${employeeDbPassword}</jvmArg>
                         <jvmArg>-Ddebug=${debug}</jvmArg>
                         <jvmArg>-DuseProxy=${useProxy}</jvmArg>
@@ -258,13 +252,13 @@
                                 <name>ActuatorEventFrontend</name>
                                 <actuatorPropPrefix>optimus-prime-fe</actuatorPropPrefix>
                                 <actuatorBaseUrl>http://optimus-prime-fe-afterburner:8080/actuator</actuatorBaseUrl>
-                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size,featureToggleIdentityMatrix</actuatorEnvProperties>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size,featureToggleIdentityMatrix,afterburner.remote.call.httpclient.connections.max</actuatorEnvProperties>
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.springboot.event.SpringBootEventConfig">
                                 <name>ActuatorEventBackend</name>
                                 <actuatorPropPrefix>optimus-prime-be</actuatorPropPrefix>
                                 <actuatorBaseUrl>http://optimus-prime-be-afterburner:8080/actuator</actuatorBaseUrl>
-                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size</actuatorEnvProperties>
+                                <actuatorEnvProperties>java.runtime.version,JDK_JAVA_OPTIONS,afterburner.async_core_pool_size,afterburner.remote.call.httpclient.connections.max</actuatorEnvProperties>
                             </eventConfig>
                             <eventConfig implementation="io.perfana.events.commandrunner.CommandRunnerEventConfig">
                                 <name>CommandRunnerGatlingPush</name>
