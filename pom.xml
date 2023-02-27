@@ -237,6 +237,10 @@
                                 <key>https://github.com/perfana/perfana-gatling-afterburner</key>
                                 <tags>GitHub</tags>
                             </eventConfig>
+                            <eventConfig implementation="io.perfana.events.commandrunner.CommandRunnerEventConfig">
+                                <name>CommandRunnerJmeterPush</name>
+                                <onStartTest>sh -c "./j2i ./target/jmeter/results -u ${influxUser} -p ${influxPassword} -a ${influxUrl} -b jmeter -t ${testEnvironment} -y StarScream -d | awk '{print $2}'"</onStartTest>
+                            </eventConfig>
 <!--                             <eventConfig implementation="io.perfana.events.testrunconfigcommand.TestRunConfigCommandEventConfig">
                                 <name>KubernetesGetDeploymentFE</name>
                                 <command>kubectl get deployment ${sut-config}-fe-afterburner -n acme -ojson</command>
