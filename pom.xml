@@ -34,7 +34,7 @@
         <gatling.version>3.3.1</gatling.version>
         <events-gatling-maven-plugin.version>4.1.0-events-5-SNAPSHOT</events-gatling-maven-plugin.version>
         <perfana-java-client.version>2.1.0-SNAPSHOT</perfana-java-client.version>
-        <test-events-wiremock.version>1.1.1</test-events-wiremock.version>
+        <test-events-wiremock.version>2.1.0</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -120,7 +120,7 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>nl.stokpop</groupId>
+                    <groupId>io.perfana</groupId>
                     <artifactId>events-gatling-maven-plugin</artifactId>
                     <version>${events-gatling-maven-plugin.version}</version>
                 </plugin>
@@ -147,7 +147,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>nl.stokpop</groupId>
+                <groupId>io.perfana</groupId>
                 <artifactId>events-gatling-maven-plugin</artifactId>
                 <configuration>
                     <resultsFolder>target/gatling/results</resultsFolder>
@@ -181,7 +181,7 @@
                             ${eventScheduleScript}
                         </scheduleScript>
                         <eventConfigs>
-                            <eventConfig implementation="nl.stokpop.event.wiremock.WiremockEventConfig">
+                            <eventConfig implementation="io.perfana.event.wiremock.WiremockEventConfig">
                                 <enabled>${wiremockEnabled}</enabled>
                                 <wiremockFilesDir>src/test/resources/wiremock</wiremockFilesDir>
                                 <wiremockUrl>${wiremockUrl}</wiremockUrl>
@@ -213,7 +213,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>nl.stokpop</groupId>
+                        <groupId>io.perfana</groupId>
                         <artifactId>test-events-wiremock</artifactId>
                         <version>${test-events-wiremock.version}</version>
                     </dependency>
