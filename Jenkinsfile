@@ -37,7 +37,7 @@ pipeline {
 
                 script {
 
-                    def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
+                    //def testRunId = env.JOB_NAME + "-" + env.BUILD_NUMBER
                     def version = "1.0." + env.BUILD_NUMBER
                     def buildUrl = env.BUILD_URL
                     def kubernetes = (params.kubernetes == true) ? "-Pkubernetes" : ""
