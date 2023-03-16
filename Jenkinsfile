@@ -62,9 +62,7 @@ pipeline {
                         def testRunId
                         if (postRC.equals(200)) {
                             def json = post.getInputStream().getText();
-                            def jsonObj = readJSON text: json
-
-                            testRunId = jsonObj['testRunId']  // this is a comparison.  It returns true
+                            testRunId = groovy.json.JsonSlurper().parseText(json).testRunId
                             println(testRunId)
                         }
                         else {
