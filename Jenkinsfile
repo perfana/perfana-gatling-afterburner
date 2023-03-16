@@ -61,15 +61,14 @@ pipeline {
                         println(postRC);
                         def testRunId
                         if (postRC.equals(200)) {
-                            def json = post.getInputStream().getText());
-                            def jsonString = '{"name":"katone","age":5}'
+                            def json = post.getInputStream().getText();
                             def jsonObj = readJSON text: json
 
                             testRunId = jsonObj['testRunId']  // this is a comparison.  It returns true
                             println(testRunId)
                         }
                         else {
-                            json = post.getErrorStream().getText());
+                            json = post.getErrorStream().getText();
                             println(json);
                         }
 
