@@ -51,6 +51,8 @@ pipeline {
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
                         sh """
+                           export json=$(curl -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json"  -d "{ \"testEnvironment\": \"acc\", \"systemUnderTest\": \"${system_under_test}\", \"workload\": \"${params.workload}\" }" perfana:3000/api/init)
+                           export testRunId=$(grep -oP '"testRunId": "\K[^"]+' <<< "$json")
                            ${mvnHome}/bin/mvn clean install -U -X events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
                         """
                     }
