@@ -50,9 +50,30 @@ pipeline {
 
                     withCredentials([string(credentialsId: 'perfanaApiKey', variable: 'TOKEN')]) {
 
+                        def post = new URL("http://perfana:3000/api/init").openConnection();
+                        def message = '{ "testEnvironment": "acc", "systemUnderTest": "OptimusPrime", "workload": "stressTest" }'
+                        post.setRequestMethod("POST")
+                        post.setDoOutput(true)
+                        post.setRequestProperty("Content-Type", "application/json")
+                        post.setRequestProperty("Authorization", "Bearer " + TOKEN)
+                        post.getOutputStream().write(message.getBytes("UTF-8"));
+                        def postRC = post.getResponseCode();
+                        println(postRC);
+                        def testRunId
+                        if (postRC.equals(200)) {
+                            def json = post.getInputStream().getText());
+                            def jsonString = '{"name":"katone","age":5}'
+                            def jsonObj = readJSON text: json
+
+                            testRunId = jsonObj['testRunId']  // this is a comparison.  It returns true
+                            println(testRunId)
+                        }
+                        else {
+                            json = post.getErrorStream().getText());
+                            println(json);
+                        }
+
                         sh """
-                           export json=$(curl -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json"  -d "{ \"testEnvironment\": \"acc\", \"systemUnderTest\": \"${system_under_test}\", \"workload\": \"${params.workload}\" }" perfana:3000/api/init)
-                           export testRunId=$(grep -oP '"testRunId": "\K[^"]+' <<< "$json")
                            ${mvnHome}/bin/mvn clean install -U -X events-gatling:test -Ptest-env-demo,${params.workload},assert-results -DtestRunId=${testRunId} -DbuildResultsUrl=${buildUrl} -Dversion=${version} -DsystemUnderTest=${system_under_test} -Dannotations="${params.annotations}" -DapiKey=$TOKEN -DtargetBaseUrl=${targetBaseUrl} ${kubernetes}
                         """
                     }
