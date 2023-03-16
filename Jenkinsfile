@@ -23,7 +23,7 @@ pipeline {
 
                 script {
 
-                    git url: params.gatlingRepo, branch: "perfana-demo"
+                    git url: params.gatlingRepo, branch: "temp-demo-pp"
 
                 }
 
