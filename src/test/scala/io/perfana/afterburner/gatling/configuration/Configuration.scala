@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.perfana.afterburner.gatling.setup._
+import io.perfana.afterburner.gatling.helpers._
 
 
 /**
@@ -17,30 +18,18 @@ object Configuration {
   val useProxy = System.getProperty("useProxy") == "true"
   val graphitePrefix = System.getProperty("gatling.data.graphite.rootPathPrefix")
 
-
-  System.out.println("Script settings:")
-  System.out.println("useProxy: " + useProxy)
-  System.out.println("graphitePrefix: " + graphitePrefix)
-  System.out.println("debug: " + isDebugActive)
-
   //  get targetBaseUrl
   val targetBaseUrl = System.getProperty("targetBaseUrl")
   System.out.println("targetBaseUrl: " + targetBaseUrl)
 
   // get testRunId
   val testRunId = System.getProperty("testRunId")
-  System.out.println("testRunId: " + testRunId)
 
   // get load figures
   val initialUsersPerSecond  = System.getProperty("initialUsersPerSecond").toDouble
   val targetUsersPerSecond  = System.getProperty("targetUsersPerSecond").toDouble
   val rampupTimeInSeconds = ( System.getProperty("rampupTimeInSeconds").toLong, TimeUnit.SECONDS )
   val constantLoadTimeInSeconds = ( System.getProperty("constantLoadTimeInSeconds").toLong, TimeUnit.SECONDS )
-
-  System.out.println("initialUsersPerSecond: " + initialUsersPerSecond)
-  System.out.println("targetUsersPerSecond: " + targetUsersPerSecond)
-  System.out.println("rampupTimeInSeconds: " + rampupTimeInSeconds)
-  System.out.println("constantLoadTimeInSeconds: " + constantLoadTimeInSeconds)
 
 
   /**
@@ -54,6 +43,7 @@ object Configuration {
 
     case "debug" => Scenarios.debugScenario
     case "acceptance"  => Scenarios.acceptanceTestScenario
+    case "slowbackend"  => Scenarios.slowBackendTestScenario
 
     case _ => Scenarios.acceptanceTestScenario
 
@@ -94,6 +84,8 @@ object Configuration {
     (baseHttpDebugProtocol)
   }
 
+  // dump all configuration to log
 
+  val dump = ConfigurationDumper.values // just here to dump config before code below is instantiated
 
 }
