@@ -33,8 +33,8 @@
         <!-- dependency versioning -->
         <gatling.version>3.3.1</gatling.version>
         <events-gatling-maven-plugin.version>4.1.0-events-5-SNAPSHOT</events-gatling-maven-plugin.version>
-        <perfana-java-client.version>2.1.0-SNAPSHOT</perfana-java-client.version>
-        <test-events-wiremock.version>2.1.0</test-events-wiremock.version>
+        <perfana-java-client.version>3.0.0-SNAPSHOT</perfana-java-client.version>
+        <test-events-wiremock.version>3.0.0-SNAPSHOT</test-events-wiremock.version>
 
         <!-- Perfana url  -->
         <perfanaUrl>http://perfana:3000</perfanaUrl>
@@ -180,6 +180,18 @@
                         <scheduleScript>
                             ${eventScheduleScript}
                         </scheduleScript>
+                        <testConfig>
+                            <systemUnderTest>${systemUnderTest}</systemUnderTest>
+                            <version>${version}</version>
+                            <workload>${workload}</workload>
+                            <testEnvironment>${testEnvironment}</testEnvironment>
+                            <testRunId>${testRunId}</testRunId>
+                            <buildResultsUrl>${CIBuildResultsUrl}</buildResultsUrl>
+                            <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
+                            <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
+                            <annotations>${annotations}</annotations>
+                            <tags>${tags}</tags>
+                        </testConfig>
                         <eventConfigs>
                             <eventConfig implementation="io.perfana.event.wiremock.WiremockEventConfig">
                                 <enabled>${wiremockEnabled}</enabled>
@@ -195,18 +207,6 @@
                                 <variables>
                                     <perfana-containers>.*mariadb.*|.*optimus-prime-fe.*|.*optimus-prime-be.*</perfana-containers>
                                 </variables>
-                                <testConfig>
-                                    <systemUnderTest>${systemUnderTest}</systemUnderTest>
-                                    <version>${version}</version>
-                                    <workload>${workload}</workload>
-                                    <testEnvironment>${testEnvironment}</testEnvironment>
-                                    <testRunId>${testRunId}</testRunId>
-                                    <buildResultsUrl>${CIBuildResultsUrl}</buildResultsUrl>
-                                    <rampupTimeInSeconds>${rampupTimeInSeconds}</rampupTimeInSeconds>
-                                    <constantLoadTimeInSeconds>${constantLoadTimeInSeconds}</constantLoadTimeInSeconds>
-                                    <annotations>${annotations}</annotations>
-                                    <tags>${tags}</tags>
-                                </testConfig>
                             </eventConfig>
                         </eventConfigs>
                     </eventSchedulerConfig>
