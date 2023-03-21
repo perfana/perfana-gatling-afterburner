@@ -31,7 +31,8 @@
         <encoding>UTF-8</encoding>
 
         <!-- dependency versioning -->
-        <gatling.version>3.3.1</gatling.version>
+	    <gatling.version>3.7.3</gatling.version>
+        <scala-maven-plugin.version>4.5.6</scala-maven-plugin.version>
         <events-gatling-maven-plugin.version>4.1.0-events-5-SNAPSHOT</events-gatling-maven-plugin.version>
         <perfana-java-client.version>3.0.0-SNAPSHOT</perfana-java-client.version>
         <test-events-wiremock.version>3.0.0-SNAPSHOT</test-events-wiremock.version>
@@ -142,6 +143,31 @@
                             <name>build.time</name>
                             <pattern>yyyyMMdd-HHmmss</pattern>
                             <timeZone>CET</timeZone>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${scala-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <jvmArgs>
+                                <jvmArg>-Xss100M</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <arg>-target:jvm-1.8</arg>
+                                <arg>-deprecation</arg>
+                                <arg>-feature</arg>
+                                <arg>-unchecked</arg>
+                                <arg>-language:implicitConversions</arg>
+                                <arg>-language:postfixOps</arg>
+                            </args>
                         </configuration>
                     </execution>
                 </executions>

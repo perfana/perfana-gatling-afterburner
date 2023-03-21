@@ -1,16 +1,14 @@
 package io.perfana.afterburner.gatling.setup
 
+import io.gatling.core.Predef._
 import io.perfana.afterburner.gatling.configuration.Configuration
 import io.perfana.afterburner.gatling.useCases._
-import io.perfana.afterburner.gatling.feeders._
-import io.gatling.core.Predef._
-import scala.concurrent.duration._
 
 /**
  * This object collects the Scenarios in the project for use in the Simulation. There are two
  * main properties in this object: acceptanceTestScenario and debugScenario. These two are
  * used in the Simulation class to setup the actual tests to run. If you wish to add
- * scenarios to either run, add them here. 
+ * scenarios to either run, add them here.
  */
 object Scenarios {
 
@@ -18,11 +16,10 @@ object Scenarios {
    * These are the scenarios run in 'normal' mode.
    */
   val acceptanceTestScenario = scenario("Acceptance test")
-    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
-//    .exec(SimpleCpuBurn.call)
-//    .pause(3)
-//    .exec(SimpleDelay.call)
+     .exec(SimpleCpuBurn.call)
+     .pause(3)
+      .exec(SimpleDelay.call)
 //    .pause(3)
 //    .exec(SimpleMiniLeak.call)
 //    .pause(3)
@@ -30,22 +27,29 @@ object Scenarios {
 //    .pause(3)
 //    .exec(RemoteDelay.call)
 //    .pause(3)
-    .exec(CallMany.call)
+   // .exec(CallMany.call)
     .pause(3)
     .exec(Database.call)
     .exec(FlakyCall.call)
 
   val slowBackendTestScenario = scenario("Slow backend test")
-    .feed(DatabaseFeeder.mariaDb)
     .exec(session => session.set("testRunId", Configuration.testRunId))
     .exec(RemoteDelay.call)
     .pause(3)
     .exec(CallMany.call)
     .pause(3)
-    .exec(Database.call)
+  //  .exec(Database.call)
     .exec(FlakyCall.call)
 
-
+  val cpuTestScenario = scenario("CPU test")
+    .exec(session => session.set("testRunId", Configuration.testRunId))
+    .exec(SimpleCpuBurnPlus.call)
+    .pause(3)
+    .exec(SimpleDelay.call)
+    .pause(3)
+    .exec(CallMany.call)
+    .pause(3)
+//    .exec(Database.call)
 
   /**
    * These are the scenarios run in 'debug' mode.
@@ -56,7 +60,6 @@ object Scenarios {
       exec(FlakyCall.call)
     }
 //
-//    .feed(DatabaseFeeder.mariaDb)
 //    .exitBlockOnFail(
 //      pause(3)
 //        .exec(Database.call)
