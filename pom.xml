@@ -86,6 +86,8 @@
         <wiremockUrl>http://wiremock:8080</wiremockUrl>
         <influxDbHost>influxdb</influxDbHost>
 
+        <targetBaseUrl>http://localhost:8080</targetBaseUrl>
+
     </properties>
 
     <dependencyManagement>
@@ -195,6 +197,7 @@
                         <jvmArg>-Dgatling.data.graphite.host=${influxDbHost}</jvmArg>
                         <jvmArg>-Xms1g</jvmArg>
                         <jvmArg>-Xmx4g</jvmArg>
+                        <jvmArg>-DtargetBaseUrl=${targetBaseUrl}</jvmArg>
                     </jvmArgs>
                     <propagateSystemProperties>false</propagateSystemProperties>
 

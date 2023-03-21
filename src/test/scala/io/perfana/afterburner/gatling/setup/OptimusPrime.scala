@@ -1,8 +1,9 @@
 package io.perfana.afterburner.gatling.setup
 
-import io.perfana.afterburner.gatling.configuration.Configuration
 import io.gatling.core.Predef._
 import io.gatling.core.structure.{PopulationBuilder, ScenarioBuilder}
+import io.perfana.afterburner.gatling.configuration.Configuration
+
 import scala.concurrent.duration._
 
 /**
